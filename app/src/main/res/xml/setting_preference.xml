@@ -44,14 +44,5 @@
             android:summary="카톡"
             android:title="알림음" />
 
-
-
-
-
-
-
-
-
-
     </PreferenceCategory>
 </PreferenceScreen>
