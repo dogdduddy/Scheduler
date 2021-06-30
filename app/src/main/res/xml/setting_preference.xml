@@ -6,10 +6,10 @@
             android:key="change_profile"
             android:title="프로필 변경하기"
             android:summary="">
-            <ListPreference
+            <EditTextPreference
                 android:key="name"
                 android:title="이름"
-                android:summary="이현수" />
+                android:summary="" />
             <ListPreference
                 android:key="email_connect"
                 android:title="계정 연동"
@@ -19,7 +19,7 @@
                 android:title="프로필 이미지 수정" />
             <ListPreference
                 android:key="Withdrawal"
-                android:title="오전 회원 탈퇴" />
+                android:title="회원 탈퇴" />
         </PreferenceScreen>
 
         <ListPreference
@@ -27,22 +27,63 @@
             android:title="공지사항"
            android:summary="" />
 
-        <ListPreference
+        <SwitchPreference
             android:key="pw"
             android:title="비밀번호"
             android:summary="" />
 
-        <ListPreference
+        <PreferenceScreen
             android:key="notice"
             android:title="알림"
-            android:summary="뭘 선택하느냐에 따라 변경됨"
-            android:entries="@array/notices"
-            android:entryValues="@array/notices" />
+            android:summary="소리/진동/무음" >
+
+        <SwitchPreference
+            android:key="notice2"
+            android:title="알림" />
 
         <ListPreference
             android:key="sound_list"
-            android:summary="카톡"
-            android:title="알림음" />
+            android:summary=""
+            android:title="알림음"
+            android:entries="@array/notices"
+            android:entryValues="@array/notices"
+            android:dependency="notice2"/>
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="letter_style"
+            android:title="글자 스타일"
+            android:summary="" >
+
+            <ListPreference
+                android:key="letter_style_change"
+                android:summary=""
+                android:title="글씨체 변경"
+                android:entries="@array/style"
+                android:entryValues="@array/style" />
+
+            <ListPreference
+                android:key="letter_size_change"
+                android:summary=""
+                android:title="글자 크기 변경"
+                android:entries="@array/size"
+                android:entryValues="@array/size" />
+        </PreferenceScreen>
 
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="개발자">
+        <ListPreference
+            android:key="help"
+            android:title="도움말"
+            android:summary="" />
+
+        <ListPreference
+            android:key="버전 정보"
+            android:title="0.0.1"
+            android:summary="" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
+
