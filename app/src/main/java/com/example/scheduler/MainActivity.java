@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         EventDecorator eventDecorator = new EventDecorator(5, calendarDayList);
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
-        // 툴바의 연도,월 초기화
+        // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
         TextView toolYear = (TextView)findViewById(R.id.toolYear);
         TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
         long now = System.currentTimeMillis();
@@ -65,13 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5));
 
+        //by병선, "dateChange, monthChange 메소드 사용 코드", 210702
         materialCalendarView.setOnDateChangedListener(this);
         materialCalendarView.setOnMonthChangedListener(this);
-
-        // 상단 버튼, 날짜 없애기
+        // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
-
-
 
     }
 
@@ -126,18 +124,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    // by병선, "달력의 month 이동 시의 이벤트", 210702
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-        //달력 이전, 다음 달로 이동 시의 이벤트
         if(date.getYear() == CalendarDay.today().getYear()) {
             TextView toolYear = (TextView)findViewById(R.id.toolYear);
             TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
             toolYear.setText(String.valueOf(date.getYear()));
-            // 그냥 6, 7 으로 출력 되어서 0을 붙여줌
+            // 그냥 6, 7 로 출력 되어서 0을 붙여줌
             toolMonth.setText("0"+String.valueOf(date.getMonth()));
         }
     }
-
+    // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
         Log.d("MainActivity", "/////////////////////////"+CalendarDay.today());
