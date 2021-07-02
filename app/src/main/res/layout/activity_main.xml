@@ -14,7 +14,7 @@
         app:mcv_tileHeight="40dp"
         app:mcv_tileWidth="50dp"
         android:layout_marginTop="350dp"
-        app:mcv_showOtherDates="out_of_range"
+        app:mcv_showOtherDates="other_months"
         />
 
     <androidx.recyclerview.widget.RecyclerView

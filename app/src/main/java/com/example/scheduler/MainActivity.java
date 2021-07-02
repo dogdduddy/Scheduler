@@ -8,18 +8,38 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.datepicker.MaterialCalendar;
 import com.google.android.material.navigation.NavigationView;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 // 메인 月달력과 함께 햄버거 등 툴바가 표시되는 페이지
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMonthChangedListener, OnDateSelectedListener {
+
+    private LayoutInflater inflater;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -27,6 +47,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NavBar();
+
+        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+        calendarDayList.add(CalendarDay.today());
+        calendarDayList.add(CalendarDay.from(2021,07,02));
+
+        EventDecorator eventDecorator = new EventDecorator(5, calendarDayList);
+        MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
+
+        // 툴바의 연도,월 초기화
+        TextView toolYear = (TextView)findViewById(R.id.toolYear);
+        TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        String getTime = sdf.format(date);
+        toolYear.setText(getTime.substring(0,4));
+        toolMonth.setText(getTime.substring(5));
+
+        materialCalendarView.setOnDateChangedListener(this);
+        materialCalendarView.setOnMonthChangedListener(this);
+
+        // 상단 버튼, 날짜 없애기
+        materialCalendarView.setTopbarVisible(false);
+
+
+
     }
 
     public void NavBar() {
@@ -78,6 +124,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+        //달력 이전, 다음 달로 이동 시의 이벤트
+        if(date.getYear() == CalendarDay.today().getYear()) {
+            TextView toolYear = (TextView)findViewById(R.id.toolYear);
+            TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
+            toolYear.setText(String.valueOf(date.getYear()));
+            // 그냥 6, 7 으로 출력 되어서 0을 붙여줌
+            toolMonth.setText("0"+String.valueOf(date.getMonth()));
+        }
+    }
+
+    @Override
+    public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
+        Log.d("MainActivity", "/////////////////////////"+CalendarDay.today());
     }
 }
 
