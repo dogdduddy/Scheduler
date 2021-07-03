@@ -9,7 +9,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <com.google.android.material.appbar.AppBarLayout
             app:elevation="0dp"
@@ -26,7 +27,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="100dp"
-        android:layout_height="210dp"
+        android:layout_height="260dp"
         android:layout_gravity="start"
         android:background="@color/white"
         app:headerLayout="@layout/nav_header_layout"

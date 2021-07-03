@@ -9,6 +9,8 @@
             android:id = "@+id/week" />
         <item android:title="투두"
             android:id = "@+id/todo" />
+        <item android:title="상점"
+            android:id = "@+id/shop" />
         <item android:title="설정"
             android:id = "@+id/setting" />
     </group>
