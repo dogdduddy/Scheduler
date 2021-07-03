@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 import com.google.android.material.datepicker.MaterialCalendar;
 import com.google.android.material.navigation.NavigationView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
@@ -48,11 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         NavBar();
 
-        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-        calendarDayList.add(CalendarDay.today());
-        calendarDayList.add(CalendarDay.from(2021,07,02));
 
-        EventDecorator eventDecorator = new EventDecorator(5, calendarDayList);
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
@@ -71,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
 
+        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+        calendarDayList.add(CalendarDay.today());
+        calendarDayList.add(CalendarDay.from(2021,07,02));
+
+        EventDecorator eventDecorator = new EventDecorator(134, calendarDayList);
+
+        materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDayList));
     }
 
     public void NavBar() {
