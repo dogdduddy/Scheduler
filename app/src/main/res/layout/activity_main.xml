@@ -7,6 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mcv_tileHeight="40dp"
+        app:mcv_tileWidth="50dp"
+        android:layout_marginTop="350dp"
+        app:mcv_showOtherDates="out_of_range"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
