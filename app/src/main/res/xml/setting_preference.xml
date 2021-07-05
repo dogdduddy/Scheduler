@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory android:title="환경설정">
 
         <PreferenceScreen
+            android:icon="@drawable/sun"
             android:key="change_profile"
             android:title="프로필 변경하기"
             android:summary="">
@@ -86,4 +88,3 @@
     </PreferenceCategory>
 
 </PreferenceScreen>
-
