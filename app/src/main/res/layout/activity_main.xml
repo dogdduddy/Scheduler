@@ -26,9 +26,11 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <com.google.android.material.appbar.AppBarLayout
+            app:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -38,13 +40,14 @@
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="260dp"
         android:layout_gravity="start"
-        android:background="#25325C"
+        android:background="@color/white"
         app:headerLayout="@layout/nav_header_layout"
         app:menu="@menu/nav_menu"
-        app:itemTextColor="@color/white"/>
-</androidx.drawerlayout.widget.DrawerLayout>
+        app:itemTextColor="@color/black"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
