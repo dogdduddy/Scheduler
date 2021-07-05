@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendarDayList.add(CalendarDay.today());
         calendarDayList.add(CalendarDay.from(2021,07,02));
 
-        EventDecorator eventDecorator = new EventDecorator(134, calendarDayList);
-
-        materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDayList));
+        int[] color = {Color.GREEN, Color.GRAY, Color.RED};
+        EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
+        materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
     }
 
     public void NavBar() {
