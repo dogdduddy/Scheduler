@@ -4,8 +4,7 @@
         <PreferenceScreen
             android:key="profile"
             android:title="프로필"
-            android:layout="@layout/activity_profile"
-            >
+            android:layout="@layout/activity_profile">
         </PreferenceScreen>
   
     <PreferenceCategory android:title="환경설정">
