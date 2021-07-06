@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         NavBar();
 
-
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
