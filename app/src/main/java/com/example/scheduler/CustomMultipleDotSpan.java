@@ -50,14 +50,14 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
         RectF rect = new RectF();
 
         int total = color.length > 5 ? 5 : color.length;
-        int leftMost = (total - 1) * -10;
+        int leftMost = (total - 1) * -5;
 
         for (int i = 0; i < total; i++) {
             int oldColor = paint.getColor();
             if (color[i] != 0) {
                 paint.setColor(color[i]);
             }
-            canvas.drawCircle((left + right) / 2 - leftMost, bottom + radius, radius, paint);
+            canvas.drawCircle((left + right) / 2 + leftMost, bottom + radius, radius, paint);
 
             // 네모 => 연속 일정 설정 가능할 듯
             //canvas.drawRect(left,top+20,right,bottom,paint);
@@ -65,7 +65,7 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
             //canvas.drawArc(left+60,top+20, right+50, bottom+60,180, 90, true, paint);
 
             paint.setColor(oldColor);
-            if(i == 3) {
+            if(i == 2) {
                 bottom += 20;
                 leftMost -= 40;
             }
