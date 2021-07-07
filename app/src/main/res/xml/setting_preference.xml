@@ -86,6 +86,11 @@
             android:summary="" />
 
         <ListPreference
+            android:key="bug_report"
+            android:title="버그 리포트"
+            android:summary="" />
+
+        <ListPreference
             android:key="버전 정보"
             android:title="0.0.1"
             android:summary="" />
