@@ -72,8 +72,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
         calendarDayList.add(CalendarDay.today());
         calendarDayList.add(CalendarDay.from(2021,07,02));
+        calendarDayList.add(CalendarDay.from(2021,07,04));
 
-        int[] color = {Color.GREEN, Color.GRAY, Color.RED};
+        int[] color = {Color.GREEN, Color.GRAY, Color.RED, Color.BLACK};
         EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
         materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
     }
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-        Log.d("MainActivity", "/////////////////////////"+CalendarDay.today());
+        Log.d("MainActivity", "/////////////////////////"+date.getDay());
     }
 }
 

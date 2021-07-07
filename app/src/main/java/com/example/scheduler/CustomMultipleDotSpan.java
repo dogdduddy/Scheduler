@@ -2,9 +2,12 @@ package com.example.scheduler;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.os.Build;
 import android.text.style.LineBackgroundSpan;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 public class CustomMultipleDotSpan implements LineBackgroundSpan {
     public static final float DEFAULT_RADIUS = 3;
@@ -35,6 +38,7 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
         this.color = color;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void drawBackground(
             Canvas canvas, Paint paint,
@@ -42,6 +46,8 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
             CharSequence charSequence,
             int start, int end, int lineNum
     ) {
+        // 부채꼴 그리기용
+        RectF rect = new RectF();
 
         int total = color.length > 5 ? 5 : color.length;
         int leftMost = (total - 1) * -10;
@@ -52,8 +58,19 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
                 paint.setColor(color[i]);
             }
             canvas.drawCircle((left + right) / 2 - leftMost, bottom + radius, radius, paint);
+
+            // 네모 => 연속 일정 설정 가능할 듯
+            //canvas.drawRect(left,top+20,right,bottom,paint);
+            // 부채꼴
+            //canvas.drawArc(left+60,top+20, right+50, bottom+60,180, 90, true, paint);
+
             paint.setColor(oldColor);
-            leftMost = leftMost + 20;
+            if(i == 3) {
+                bottom += 20;
+                leftMost -= 40;
+            }
+            else
+                leftMost = leftMost + 20;
         }
     }
 }
