@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
 
+        // 점 찍기
         ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
         calendarDayList.add(CalendarDay.today());
         calendarDayList.add(CalendarDay.from(2021,07,02));
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int[] color = {Color.GREEN, Color.GRAY, Color.RED, Color.BLACK};
         EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
         materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
+
+        //  day 클릭 시 원
+        materialCalendarView.;
+        materialCalendarView.setSelectionColor(Color.RED);
+        ;
     }
 
     public void NavBar() {

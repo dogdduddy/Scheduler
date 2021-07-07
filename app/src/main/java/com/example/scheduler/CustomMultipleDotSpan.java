@@ -14,24 +14,20 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
     private final float radius;
     private int[] color = new int[0];
 
-
     public CustomMultipleDotSpan() {
         this.radius = DEFAULT_RADIUS;
         this.color[0] = 0;
     }
-
 
     public CustomMultipleDotSpan(int color) {
         this.radius = DEFAULT_RADIUS;
         this.color[0] = 0;
     }
 
-
     public CustomMultipleDotSpan(float radius) {
         this.radius = radius;
         this.color[0] = 0;
     }
-
 
     public CustomMultipleDotSpan(float radius, int[] color) {
         this.radius = radius;
@@ -50,6 +46,7 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
         RectF rect = new RectF();
 
         int total = color.length > 5 ? 5 : color.length;
+        // Dot의 초기 x좌표 위치 조정
         int leftMost = (total - 1) * -5;
 
         for (int i = 0; i < total; i++) {
@@ -64,6 +61,7 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
             // 부채꼴
             //canvas.drawArc(left+60,top+20, right+50, bottom+60,180, 90, true, paint);
 
+            // dot 4개 이상 부터는 아래쪽에 위치 되도록 / 6개 제한은 리스트에서 하기로
             paint.setColor(oldColor);
             if(i == 2) {
                 bottom += 20;
