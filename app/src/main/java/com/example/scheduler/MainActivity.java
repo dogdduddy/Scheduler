@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
 
         //  day 클릭 시 원
-        materialCalendarView.;
         materialCalendarView.setSelectionColor(Color.RED);
         ;
     }
