@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendarDayList.add(CalendarDay.today());
         calendarDayList.add(CalendarDay.from(2021,07,02));
         calendarDayList.add(CalendarDay.from(2021,07,04));
-        calendarDayList.add(CalendarDay.from(2021,07,05));
+        calendarDayList.add(CalendarDay.from(2021,07,06));
 
         ArrayList<Integer> dotColorList = new ArrayList<>();
 
