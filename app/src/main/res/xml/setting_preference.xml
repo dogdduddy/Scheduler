@@ -9,7 +9,7 @@
   
     <PreferenceCategory android:title="환경설정">
         <PreferenceScreen
-            android:icon="@drawable/sun"
+            android:icon="@drawable/flower"
             android:key="change_profile"
             android:title="프로필 변경하기"
             android:summary="">
