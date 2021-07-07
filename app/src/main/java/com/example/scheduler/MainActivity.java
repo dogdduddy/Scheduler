@@ -8,16 +8,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,51 +33,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
 // 메인 月달력과 함께 햄버거 등 툴바가 표시되는 페이지
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMonthChangedListener, OnDateSelectedListener {
-
-    private LayoutInflater inflater;
+    TextView toolYear;
+    TextView toolMonth;
+    MaterialCalendarView materialCalendarView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        materialCalendarView = findViewById(R.id.calendarView);
+
         NavBar();
-
-        MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
-
-        // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
-        TextView toolYear = (TextView)findViewById(R.id.toolYear);
-        TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-        String getTime = sdf.format(date);
-        toolYear.setText(getTime.substring(0,4));
-        toolMonth.setText(getTime.substring(5));
-
-        //by병선, "dateChange, monthChange 메소드 사용 코드", 210702
-        materialCalendarView.setOnDateChangedListener(this);
-        materialCalendarView.setOnMonthChangedListener(this);
-        // by병선, "상단 bar 없애기", 210702
-        materialCalendarView.setTopbarVisible(false);
-
-        // 점 찍기
-        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-        calendarDayList.add(CalendarDay.today());
-        calendarDayList.add(CalendarDay.from(2021,07,02));
-        calendarDayList.add(CalendarDay.from(2021,07,04));
-
-        int[] color = {Color.GREEN, Color.GRAY, Color.RED, Color.BLACK};
-        EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
-        materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
-
-        //  day 클릭 시 원
-        materialCalendarView.setSelectionColor(Color.RED);
-        ;
+        ToolMonthInit();
+        CalendarInit();
+        AddDecorator();
     }
 
     public void NavBar() {
@@ -102,6 +71,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
+    private void AddDecorator() {
+
+        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+        calendarDayList.add(CalendarDay.today());
+        calendarDayList.add(CalendarDay.from(2021,07,02));
+        calendarDayList.add(CalendarDay.from(2021,07,04));
+        calendarDayList.add(CalendarDay.from(2021,07,05));
+
+        ArrayList<Integer> dotColorList = new ArrayList<>();
+
+        dotColorList.add(Color.GREEN);
+        dotColorList.add(Color.GRAY);
+        dotColorList.add(Color.RED);
+        dotColorList.add(Color.BLACK);
+
+        materialCalendarView.addDecorator(new EventDecorator(dotColorList, calendarDayList));
+
+        //  day 클릭 시 원
+        materialCalendarView.setSelectionColor(Color.RED);
     }
 
     @Override
@@ -138,12 +129,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "달력의 month 이동 시의 이벤트", 210702
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-        TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
-        TextView toolYear = (TextView)findViewById(R.id.toolYear);
         // 그냥 6, 7 로 출력 되어서 0을 붙여줌
         if(date.getMonth() <= 9)
             toolMonth.setText("0"+String.valueOf(date.getMonth()));
-
         else if (date.getMonth() > 9)
             toolMonth.setText(String.valueOf(date.getMonth()));
 
@@ -153,6 +141,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
         Log.d("MainActivity", "/////////////////////////"+date.getDay());
+    }
+
+    // by병선, "캘린더 설정 초기화", 210707
+    private  void CalendarInit() {
+        //by병선, "dateChange, monthChange 메소드 사용 코드", 210702
+        materialCalendarView.setOnDateChangedListener(this);
+        materialCalendarView.setOnMonthChangedListener(this);
+        // by병선, "상단 bar 없애기", 210702
+        materialCalendarView.setTopbarVisible(false);
+    }
+
+    // by병선, "ToolBar 연,월 초기화", 210707
+    private void ToolMonthInit() {
+        // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
+        toolYear= (TextView)findViewById(R.id.toolYear);
+        toolMonth = (TextView)findViewById(R.id.toolMonth);
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        String getTime = sdf.format(date);
+        toolYear.setText(getTime.substring(0,4));
+        toolMonth.setText(getTime.substring(5));
     }
 }
 

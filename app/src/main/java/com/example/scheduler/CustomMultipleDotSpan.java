@@ -9,27 +9,30 @@ import android.text.style.LineBackgroundSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class CustomMultipleDotSpan implements LineBackgroundSpan {
     public static final float DEFAULT_RADIUS = 3;
     private final float radius;
-    private int[] color = new int[0];
+    private ArrayList<Integer> color;
 
     public CustomMultipleDotSpan() {
         this.radius = DEFAULT_RADIUS;
-        this.color[0] = 0;
+        //this.color.get(0) = 0;
     }
 
     public CustomMultipleDotSpan(int color) {
         this.radius = DEFAULT_RADIUS;
-        this.color[0] = 0;
+        //this.color[0] = 0;
     }
 
     public CustomMultipleDotSpan(float radius) {
         this.radius = radius;
-        this.color[0] = 0;
+        //this.color[0] = 0;
     }
 
-    public CustomMultipleDotSpan(float radius, int[] color) {
+    public CustomMultipleDotSpan(float radius, ArrayList<Integer> color) {
         this.radius = radius;
         this.color = color;
     }
@@ -45,14 +48,14 @@ public class CustomMultipleDotSpan implements LineBackgroundSpan {
         // 부채꼴 그리기용
         RectF rect = new RectF();
 
-        int total = color.length > 5 ? 5 : color.length;
+        int total = color.size() > 5 ? 5 : color.size();
         // Dot의 초기 x좌표 위치 조정
         int leftMost = (total - 1) * -5;
 
         for (int i = 0; i < total; i++) {
             int oldColor = paint.getColor();
-            if (color[i] != 0) {
-                paint.setColor(color[i]);
+            if (color.get(i) != 0) {
+                paint.setColor(color.get(i));
             }
             canvas.drawCircle((left + right) / 2 + leftMost, bottom + radius, radius, paint);
 
