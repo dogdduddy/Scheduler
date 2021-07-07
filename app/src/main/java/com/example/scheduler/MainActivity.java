@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
         calendarDayList.add(CalendarDay.today());
-        calendarDayList.add(CalendarDay.from(2021,07,02));
+        calendarDayList.add(CalendarDay.from(2021,07,01));
         calendarDayList.add(CalendarDay.from(2021,07,05));
         calendarDayList.add(CalendarDay.from(2021,07,06));
 
