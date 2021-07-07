@@ -18,9 +18,33 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <include
-                layout="@layout/toolbar"
-                android:id="@+id/toolbar"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/menu_btn"
+                android:text="Menu" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/toolYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginLeft="30dp"
+                    />
+                <TextView
+                    android:id="@+id/toolMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="30sp"
+                    android:text=""
+                    />
+            </LinearLayout>
 
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -42,13 +66,4 @@
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="100dp"
-        android:layout_height="260dp"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        app:headerLayout="@layout/nav_header_layout"
-        app:menu="@menu/nav_menu"
-        app:itemTextColor="@color/black"/>
     </androidx.drawerlayout.widget.DrawerLayout>

@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +38,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
 // 메인 月달력과 함께 햄버거 등 툴바가 표시되는 페이지
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMonthChangedListener, OnDateSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnMonthChangedListener, OnDateSelectedListener {
 
     private LayoutInflater inflater;
 
@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NavBar();
-
 
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
@@ -77,57 +75,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int[] color = {Color.GREEN, Color.GRAY, Color.RED};
         EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
         materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
-    }
 
-    public void NavBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        findViewById(R.id.menu_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(),view);
+                getMenuInflater().inflate(R.menu.popupmenu,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.month){
+                            Toast.makeText(MainActivity.this, "메뉴 1 클릭", Toast.LENGTH_SHORT).show();
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.openNavDrawer,
-                R.string.closeNavDrawer
-        );
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        //Toast.makeText(this, "현재 페이지입니다.", Toast.LENGTH_SHORT).show();
-        if (id == R.id.month) {
-            Toast.makeText(this, "월간 달력 페이지 입니다.", Toast.LENGTH_SHORT).show();
-            // 햄버거에서 월간 클릭했을 때 나오는 텍스트
-        }
-        else if (id == R.id.week) {
-            Intent intent = new Intent(MainActivity.this, Week.class);
-            startActivity(intent);
-            Toast.makeText(this, "주간 달력 페이지 입니다.", Toast.LENGTH_SHORT).show();
-            // 햄버거에서 주간 클릭했을 때 나오는 텍스트
-        }
-        else if (id == R.id.todo) {
-            Intent intent = new Intent(MainActivity.this, Todo.class);
-            startActivity(intent);
-            Toast.makeText(this, "할일 페이지 입니다.", Toast.LENGTH_SHORT).show();
-            // 햄버거에서 할일 클릭했을 때 나오는 텍스트
-        }
-        else if (id == R.id.setting) {
-            Intent intent = new Intent(MainActivity.this, Setting.class);
-            startActivity(intent);
-            Toast.makeText(this, "설정 페이지 입니다.", Toast.LENGTH_SHORT).show();
-            // 햄버거에서 세팅 클릭했을 때 나오는 텍스트
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+                        }else if (menuItem.getItemId() == R.id.week){
+                            Toast.makeText(MainActivity.this, "메뉴 2 클릭", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Week.class);
+                            startActivity(intent);
+                        }
+                        else if (menuItem.getItemId() == R.id.todo){
+                            Toast.makeText(MainActivity.this, "메뉴 투두 클릭", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Todo.class);
+                            startActivity(intent);
+                        }
+                        else if (menuItem.getItemId() == R.id.shop){
+                            Toast.makeText(MainActivity.this, "메뉴 상점 클릭", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Todo.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(MainActivity.this, "환경설정 클릭", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Setting.class);
+                            startActivity(intent);
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
     }
 
     // by병선, "달력의 month 이동 시의 이벤트", 210702
@@ -150,6 +134,3 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("MainActivity", "/////////////////////////"+CalendarDay.today());
     }
 }
-
-
-

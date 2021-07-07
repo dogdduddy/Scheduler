@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
 
         <item android:title="캘린더"
+            android:icon="@drawable/flower"
             android:id = "@+id/month" />
         <item android:title="일기장"
+            android:iconTint="@color/black"
             android:id = "@+id/week" />
         <item android:title="투두"
             android:id = "@+id/todo" />
@@ -13,9 +14,11 @@
             android:id = "@+id/shop" />
         <item android:title="설정"
             android:id = "@+id/setting" />
-    </group>
+
 
     <!--
+    <group -> 옆에 동그라미 만들기
+
     <item android:title="">
         <menu>
             <item android:title="설정"
