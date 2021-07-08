@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,10 +19,13 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +51,10 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements OnMonthChangedListener, OnDateSelectedListener {
 
     private LayoutInflater inflater;
+    ImageView menu_show;
+    MenuBuilder menuBuilder;
 
+    @SuppressLint({"RestrictedApi", "WrongViewCast"})
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
-        TextView toolYear = (TextView)findViewById(R.id.toolYear);
-        TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
+        TextView toolYear = (TextView) findViewById(R.id.toolYear);
+        TextView toolMonth = (TextView) findViewById(R.id.toolMonth);
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         String getTime = sdf.format(date);
-        toolYear.setText(getTime.substring(0,4));
+        toolYear.setText(getTime.substring(0, 4));
         toolMonth.setText(getTime.substring(5));
 
         //by병선, "dateChange, monthChange 메소드 사용 코드", 210702
@@ -73,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
 
         ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
         calendarDayList.add(CalendarDay.today());
-        calendarDayList.add(CalendarDay.from(2021,07,02));
+        calendarDayList.add(CalendarDay.from(2021, 07, 02));
 
         int[] color = {Color.GREEN, Color.GRAY, Color.RED};
         EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
@@ -95,7 +103,65 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
         */
+        menu_show = (ImageView) findViewById(R.id.menu_btn);
+        menuBuilder = new MenuBuilder(this);
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.popupmenu, menuBuilder);
 
+        menu_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MenuPopupHelper optionMenu = new MenuPopupHelper(MainActivity.this, menuBuilder, view);
+                optionMenu.setForceShowIcon(true);
+
+                menuBuilder.setCallback(new MenuBuilder.Callback() {
+                    @Override
+
+                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
+                        Intent intent;
+                        switch (item.getItemId()) {
+
+                            case R.id.month:
+                                Toast.makeText(MainActivity.this, "메뉴 1 클릭", Toast.LENGTH_SHORT).show();
+                                return true;
+
+                            case R.id.week:
+                                intent = new Intent(MainActivity.this, Week.class);
+                                startActivity(intent);
+                                return true;
+
+                            case R.id.todo:
+                                intent = new Intent(MainActivity.this, Todo.class);
+                                startActivity(intent);
+                                return true;
+
+                            case R.id.shop:
+                                intent = new Intent(MainActivity.this, Shop.class);
+                                startActivity(intent);
+                                return true;
+
+                            case R.id.setting:
+                                intent = new Intent(MainActivity.this, Setting.class);
+                                startActivity(intent);
+                                return true;
+
+                            default:
+                                return true;
+
+                        }
+                    }
+
+                    @Override
+                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
+
+                    }
+                });
+                optionMenu.show();
+            }
+        });
+    }
+
+/*
         findViewById(R.id.menu_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -133,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
             }
         });
     }
-
+*/
     // by병선, "달력의 month 이동 시의 이벤트", 210702
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
