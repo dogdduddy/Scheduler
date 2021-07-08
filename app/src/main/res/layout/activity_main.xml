@@ -24,7 +24,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/menu_btn"
-               android:src="@drawable/sun"
+               android:src="@drawable/home_btn"
                 app:layout_editor_absoluteX="50dp"
                 app:layout_editor_absoluteY="50dp"/>
 
