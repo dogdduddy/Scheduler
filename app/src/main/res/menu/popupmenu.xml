@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
         <item android:title="캘린더"
+            android:id = "@+id/month"
+            app:showAsAction="never"
+            android:icon="@drawable/sun"/>
+
+        <item
+            android:layout_width="20dp"
             android:icon="@drawable/flower"
-            android:id = "@+id/month" />
-        <item android:title="일기장"
-            android:iconTint="@color/black"
-            android:id = "@+id/week" />
+            android:id="@+id/week"
+            android:title="일기장">
+                <menu>
+                        <item
+                            android:icon="@drawable/flower"
+                            android:id="@+id/write_dairy"
+                            android:title="일기장 바로 추가하기"/>
+                </menu>
+        </item>
+
         <item android:title="투두"
             android:id = "@+id/todo" />
         <item android:title="상점"

@@ -14,10 +14,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -76,6 +78,23 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         int[] color = {Color.GREEN, Color.GRAY, Color.RED};
         EventDecorator eventDecorator = new EventDecorator(color, calendarDayList);
         materialCalendarView.addDecorator(new EventDecorator(color, calendarDayList));
+
+        /*
+        // 뒷배경 흐리게 하기
+
+        WindowManager.LayoutParams layoutParams= new WindowManager.LayoutParams();
+        layoutParams.flags= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        layoutParams.dimAmount= 0.7f;getWindow().setAttributes(layoutParams);
+        setContentView(R.layout.menu_btn); // 요거에 뭐 넣느냐에 따라 전체 화면 크기 조정됨
+
+        // 사이즈 조절
+
+        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+        int width = (int) (((DisplayMetrics) dm).widthPixels * 0.9); // Display 사이즈의 90%
+        int height = (int) (dm.heightPixels * 0.9); // Display 사이즈의 90%
+        getWindow().getAttributes().width = width;
+        getWindow().getAttributes().height = height;
+        */
 
         findViewById(R.id.menu_btn).setOnClickListener(new View.OnClickListener() {
             @Override
