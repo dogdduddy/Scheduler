@@ -17,7 +17,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
-
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="1 입력해주세요."
+                android:text=""
+                android:id="@+id/editText1"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="2 입력해주세요."
+                android:text=""
+                android:id="@+id/editText2"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="3 입력해주세요."
+                android:text=""
+                android:id="@+id/editText3"
+                />
             <include
                 layout="@layout/toolbar"
                 android:id="@+id/toolbar"/>

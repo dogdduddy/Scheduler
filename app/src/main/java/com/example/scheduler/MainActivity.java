@@ -12,8 +12,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +54,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavBar();
         ToolMonthInit();
         CalendarInit();
-        AddDecorator();
+        //AddDecorator();
+        ChangeText();
+    }
+    public void ChangeText() {
+        EditText editText1 = (EditText)findViewById(R.id.editText1);
+        EditText editText2 = (EditText)findViewById(R.id.editText2);
+        EditText editText3 = (EditText)findViewById(R.id.editText3);
+
+        editText1.addTextChangedListener(test());
+        editText2.addTextChangedListener(test());
+        editText3.addTextChangedListener(test());
+    }
+    public TextWatcher test() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                TextView editText1 = findViewById(R.id.editText1);
+                TextView editText2 = findViewById(R.id.editText2);
+                TextView editText3 = findViewById(R.id.editText3);
+
+                ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+                ArrayList<Integer> dotColorList = new ArrayList<>();
+
+                // dot 중복 표시. array말고  그냥 배열은 어떤가? 6개 고정이므로
+
+                if(!((editText1.getText().toString().length()) == 0)) {
+                    dotColorList.add(Color.GREEN);
+                    calendarDayList.add(CalendarDay.from(2021,07,01));
+
+                    AddDecorator(calendarDayList, dotColorList);
+                }if(!((editText2.getText().toString().length()) == 0)) {
+                    dotColorList.add(Color.RED);
+                    calendarDayList.add(CalendarDay.from(2021,07,02));
+
+                    AddDecorator(calendarDayList, dotColorList);
+                }if(!((editText3.getText().toString().length()) == 0)) {
+                    dotColorList.add(Color.BLACK);
+                    calendarDayList.add(CalendarDay.from(2021,07,03));
+
+                    AddDecorator(calendarDayList, dotColorList);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+    }
+    // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
+    private void AddDecorator(ArrayList<CalendarDay> calendarDayList, ArrayList<Integer> dotColorList) {
+
+        materialCalendarView.addDecorator(new EventDecorator(dotColorList, calendarDayList));
+
+        //  day 클릭 시 원
+        materialCalendarView.setSelectionColor(Color.RED);
     }
 
     public void NavBar() {
@@ -73,27 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
-    private void AddDecorator() {
 
-        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-        calendarDayList.add(CalendarDay.today());
-        calendarDayList.add(CalendarDay.from(2021,07,01));
-        calendarDayList.add(CalendarDay.from(2021,07,05));
-        calendarDayList.add(CalendarDay.from(2021,07,06));
-
-        ArrayList<Integer> dotColorList = new ArrayList<>();
-
-        dotColorList.add(Color.GREEN);
-        dotColorList.add(Color.GRAY);
-        dotColorList.add(Color.RED);
-        dotColorList.add(Color.BLACK);
-
-        materialCalendarView.addDecorator(new EventDecorator(dotColorList, calendarDayList));
-
-        //  day 클릭 시 원
-        materialCalendarView.setSelectionColor(Color.RED);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
