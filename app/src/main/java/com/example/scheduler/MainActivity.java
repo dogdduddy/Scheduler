@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
                         Intent intent;
                         switch (item.getItemId()) {
 
-                            case R.id.month:
+                            case R.id.calendar:
                                 Toast.makeText(MainActivity.this, "캘린더", Toast.LENGTH_SHORT).show();
                                 return true;
 
@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
 
                             default:
                                 return true;
-
                         }
                     }
                     @Override

@@ -4,7 +4,7 @@
 
 
         <item android:title="캘린더"
-            android:id = "@+id/month"
+            android:id = "@+id/calendar"
             android:icon="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <item android:title="다이어리"
