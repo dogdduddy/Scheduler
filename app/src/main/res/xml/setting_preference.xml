@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <PreferenceScreen
-            android:key="profile"
-            android:title="프로필"
-            android:layout="@layout/activity_profile">
-        </PreferenceScreen>
-  
+    <PreferenceScreen
+        android:key="profile"
+        android:layout="@layout/activity_profile"
+        android:title="프로필"></PreferenceScreen>
+
     <PreferenceCategory android:title="환경설정">
 
         <PreferenceScreen
             android:icon="@drawable/flower"
             android:key="change_profile"
-            android:title="프로필 변경하기"
-            android:summary="">
+            android:summary=""
+            android:title="프로필 변경하기">
             <EditTextPreference
                 android:key="name"
-                android:title="이름"
-                android:summary="" />
+                android:summary=""
+                android:title="이름" />
             <ListPreference
                 android:key="email_connect"
-                android:title="계정 연동"
-                android:summary="hyeonsulee@yahoo.com" />
+                android:summary="hyeonsulee@yahoo.com"
+                android:title="계정 연동" />
             <ListPreference
                 android:key="change_profile_image"
                 android:title="프로필 이미지 수정" />
@@ -30,52 +29,53 @@
                 android:title="회원 탈퇴" />
         </PreferenceScreen>
 
-        <ListPreference
-            android:key="gongzi"
-            android:title="공지사항"
-           android:summary="" />
+        <PreferenceScreen
+                android:title="공지사항">
+                <intent android:targetPackage="com.example.scheduler"
+                    android:targetClass="com.example.scheduler.ListView_Notice"/>
+        </PreferenceScreen>
 
         <SwitchPreference
             android:key="pw"
-            android:title="비밀번호"
-            android:summary="" />
+            android:summary=""
+            android:title="비밀번호" />
 
         <PreferenceScreen
-            android:key="notice"
-            android:title="알림"
-            android:summary="소리/진동/무음" >
+            android:key="notification_method"
+            android:summary="소리/진동/무음"
+            android:title="알림">
 
-        <SwitchPreference
-            android:key="notice2"
-            android:title="알림" />
+            <SwitchPreference
+                android:key="sound"
+                android:title="알림" />
 
-        <ListPreference
-            android:key="sound_list"
-            android:summary=""
-            android:title="알림음"
-            android:entries="@array/notices"
-            android:entryValues="@array/notices"
-            android:dependency="notice2"/>
+            <ListPreference
+                android:dependency="sound"
+                android:key="sound_list"
+                android:summary=""
+                android:title="알림음"
+                android:entries="@array/sound_notice"
+                android:entryValues="@array/sound_notice"/>
         </PreferenceScreen>
 
         <PreferenceScreen
             android:key="letter_style"
-            android:title="글자 스타일"
-            android:summary="" >
+            android:summary=""
+            android:title="글자 스타일">
 
             <ListPreference
+                android:entries="@array/style"
+                android:entryValues="@array/style"
                 android:key="letter_style_change"
                 android:summary=""
-                android:title="글씨체 변경"
-                android:entries="@array/style"
-                android:entryValues="@array/style" />
+                android:title="글씨체 변경" />
 
             <ListPreference
+                android:entries="@array/size"
+                android:entryValues="@array/size"
                 android:key="letter_size_change"
                 android:summary=""
-                android:title="글자 크기 변경"
-                android:entries="@array/size"
-                android:entryValues="@array/size" />
+                android:title="글자 크기 변경" />
         </PreferenceScreen>
 
     </PreferenceCategory>
@@ -83,18 +83,18 @@
     <PreferenceCategory android:title="개발자">
         <ListPreference
             android:key="help"
-            android:title="도움말"
-            android:summary="" />
+            android:summary=""
+            android:title="도움말" />
 
         <ListPreference
             android:key="bug_report"
-            android:title="버그 리포트"
-            android:summary="" />
+            android:summary=""
+            android:title="버그 리포트" />
 
         <ListPreference
             android:key="버전 정보"
-            android:title="0.0.1"
-            android:summary="" />
+            android:summary=""
+            android:title="0.0.1" />
 
     </PreferenceCategory>
 

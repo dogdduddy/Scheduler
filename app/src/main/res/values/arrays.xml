@@ -2,7 +2,7 @@
 <resources>
 
     <!-- 현수 소리 변경 목록-->
-    <string-array name="notices">
+    <string-array name="sound_notice">
         <item>소리</item>
         <item>진동</item>
         <item>무음</item>

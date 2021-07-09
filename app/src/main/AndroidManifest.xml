@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Diary"></activity>
+        <activity android:name=".Notice"></activity>
+        <activity android:name=".Diary" />
         <activity android:name=".Shop" />
         <activity android:name=".Profile" />
+        <activity android:name=".ListView_Notice" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

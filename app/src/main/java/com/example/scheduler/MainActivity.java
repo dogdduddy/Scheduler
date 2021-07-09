@@ -23,9 +23,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 // 메인 月달력과 함께 햄버거 등 툴바가 표시되는 페이지
 
@@ -89,14 +92,12 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
 
         /*
         // 뒷배경 흐리게 하기
-
         WindowManager.LayoutParams layoutParams= new WindowManager.LayoutParams();
         layoutParams.flags= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         layoutParams.dimAmount= 0.7f;getWindow().setAttributes(layoutParams);
         setContentView(R.drawable.); // 요거에 뭐 넣느냐에 따라 전체 화면 크기 조정됨
 
         // 사이즈 조절
-
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
         int width = (int) (((DisplayMetrics) dm).widthPixels * 0.9); // Display 사이즈의 90%
         int height = (int) (dm.heightPixels * 0.9); // Display 사이즈의 90%

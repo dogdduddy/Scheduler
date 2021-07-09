@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
         <item android:title="캘린더"
@@ -17,7 +16,8 @@
             android:id = "@+id/setting" />
 
     <!--
-    <group -> 옆에 동그라미 만들기
+    // 오른쪽에 클릭 시 표시되는 원 생성
+    <group
 
     <item android:title="">
         <menu>
@@ -26,6 +26,7 @@
         </menu>
     </item>
 
+    // 서브메뉴 만들기
     <item
             android:layout_width="20dp"
             android:icon="@drawable/flower"

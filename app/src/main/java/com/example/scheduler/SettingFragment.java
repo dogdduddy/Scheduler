@@ -19,10 +19,8 @@ public class SettingFragment extends PreferenceFragment {
     ListPreference letterstylePrefernence;
     ListPreference lettersizePrefernence;
     EditTextPreference namePreference;
-    /*
-    ListPreference keywordSoundPreference;
-    PreferenceScreen keywordScreen;
-    */
+
+    // 이미 저장된 환경설정 내용을 가져와, 그 내용들을 환경설정의 summary부분에 세팅
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +31,11 @@ public class SettingFragment extends PreferenceFragment {
         namePreference = (EditTextPreference) findPreference("name");
         soundPrefernence = (ListPreference) findPreference("sound_list");
 
-        /*
-        keywordSoundPreference = (ListPreference) findPreference("key_word_list");
-        keywordScreen = (PreferenceScreen) findPreference("keyword_screen");
-        */
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         if (!prefs.getString("sound_list", "").equals("")) ;
         {
-            soundPrefernence.setSummary(prefs.getString("sound_list", "카톡"));
+            soundPrefernence.setSummary(prefs.getString("sound_list", ""));
         }
         if (!prefs.getString("letter_style_change", "").equals("")) ;
         {
@@ -55,25 +49,16 @@ public class SettingFragment extends PreferenceFragment {
         {
             namePreference.setSummary(prefs.getString("name", ""));
         }
-        /*
-        if (!prefs.getString("keyword_sound_list", "").equals("")) ;
-        {
-            keywordSoundPreference.setSummary(prefs.getString("keyword_sound_list", "카톡"));
-        }
 
-
-        if (prefs.getBoolean("keyword", false)) {
-            keywordScreen.setSummary("사용");
-        }
-        */
         prefs.registerOnSharedPreferenceChangeListener(preListener);
     }
 
+    //봉뚜 사용자가 환경설정 하는 순간 이벤트 처리
     SharedPreferences.OnSharedPreferenceChangeListener preListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.equals("sound_list")) {
-                soundPrefernence.setSummary(prefs.getString("sound_list", "카톡"));
+                soundPrefernence.setSummary(prefs.getString("sound_list", ""));
             }
             if (key.equals("letter_style_change")) {
                letterstylePrefernence.setSummary(prefs.getString("letter_style_change", ""));
@@ -84,21 +69,6 @@ public class SettingFragment extends PreferenceFragment {
             if (key.equals("name")) {
                 namePreference.setSummary(prefs.getString("name", ""));
             }
-            /*
-            if (key.equals("keyword_sound_list")) {
-                keywordSoundPreference.setSummary((prefs.getString("keyword_sound_list", "카톡")));
-            }
-
-            if (key.equals("keyword")) {
-
-                if (prefs.getBoolean("keyword", false)) {
-                    keywordScreen.setSummary("사용");
-                } else {
-                    keywordScreen.setSummary("사용안함");
-                }
-                ((BaseAdapter)getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
-            }
-            */
         }
     };
 }
