@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         WindowManager.LayoutParams layoutParams= new WindowManager.LayoutParams();
         layoutParams.flags= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         layoutParams.dimAmount= 0.7f;getWindow().setAttributes(layoutParams);
-        setContentView(R.layout.menu_btn); // 요거에 뭐 넣느냐에 따라 전체 화면 크기 조정됨
+        setContentView(R.drawable.); // 요거에 뭐 넣느냐에 따라 전체 화면 크기 조정됨
 
         // 사이즈 조절
 
