@@ -5,20 +5,16 @@
 
         <item android:title="캘린더"
             android:id = "@+id/month"
-            android:icon="@drawable/ic_baseline_arrow_back_ios_new_24"
-            />
+            android:icon="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <item android:title="다이어리"
-            android:id = "@+id/week"
+            android:id = "@+id/diary"
             android:icon="@drawable/ic_baseline_arrow_back_ios_new_24"/>
 
-        <item android:title="투두"
-            android:id = "@+id/todo" />
         <item android:title="상점"
             android:id = "@+id/shop" />
         <item android:title="설정"
             android:id = "@+id/setting" />
-
 
     <!--
     <group -> 옆에 동그라미 만들기
@@ -43,5 +39,4 @@
                 </menu>
         </item>
     -->
-
 </menu>

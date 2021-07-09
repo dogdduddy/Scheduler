@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Week">
+    tools:context=".Diary">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/week"
-        android:textSize="30dp"
-        android:text="주간 일정 페이지"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다이어리 페이지"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -122,16 +122,11 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
                         switch (item.getItemId()) {
 
                             case R.id.month:
-                                Toast.makeText(MainActivity.this, "메뉴 1 클릭", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "캘린더", Toast.LENGTH_SHORT).show();
                                 return true;
 
-                            case R.id.week:
-                                intent = new Intent(MainActivity.this, Week.class);
-                                startActivity(intent);
-                                return true;
-
-                            case R.id.todo:
-                                intent = new Intent(MainActivity.this, Todo.class);
+                            case R.id.diary:
+                                intent = new Intent(MainActivity.this, Diary.class);
                                 startActivity(intent);
                                 return true;
 
@@ -150,10 +145,8 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
 
                         }
                     }
-
                     @Override
                     public void onMenuModeChange(@NonNull MenuBuilder menu) {
-
                     }
                 });
                 optionMenu.show();
@@ -161,45 +154,6 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         });
     }
 
-/*
-        findViewById(R.id.menu_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(),view);
-                getMenuInflater().inflate(R.menu.popupmenu,popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        if (menuItem.getItemId() == R.id.month){
-                            Toast.makeText(MainActivity.this, "메뉴 1 클릭", Toast.LENGTH_SHORT).show();
-
-                        }else if (menuItem.getItemId() == R.id.week){
-                            Toast.makeText(MainActivity.this, "메뉴 2 클릭", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, Week.class);
-                            startActivity(intent);
-                        }
-                        else if (menuItem.getItemId() == R.id.todo){
-                            Toast.makeText(MainActivity.this, "메뉴 투두 클릭", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, Todo.class);
-                            startActivity(intent);
-                        }
-                        else if (menuItem.getItemId() == R.id.shop){
-                            Toast.makeText(MainActivity.this, "메뉴 상점 클릭", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, Todo.class);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(MainActivity.this, "환경설정 클릭", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, Setting.class);
-                            startActivity(intent);
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
-    }
-*/
     // by병선, "달력의 month 이동 시의 이벤트", 210702
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {

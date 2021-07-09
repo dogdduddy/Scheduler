@@ -18,8 +18,6 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-
-
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -31,23 +29,20 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical" >
                 <TextView
                     android:id="@+id/toolYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:layout_marginLeft="30dp"
-                    />
+                    android:layout_marginLeft="30dp" />
                 <TextView
                     android:id="@+id/toolMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:textSize="30sp"
-                    android:text=""
-                    />
+                    android:text="" />
             </LinearLayout>
 
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -58,16 +53,13 @@
                 app:mcv_tileHeight="40dp"
                 app:mcv_tileWidth="50dp"
                 android:layout_marginTop="350dp"
-                app:mcv_showOtherDates="out_of_range"
-                />
+                app:mcv_showOtherDates="out_of_range" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                />
+                android:layout_weight="3" />
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     </androidx.drawerlayout.widget.DrawerLayout>
