@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
         */
+
         menu_show = (ImageView) findViewById(R.id.menu_btn);
         menuBuilder = new MenuBuilder(this);
         MenuInflater inflater = new MenuInflater(this);

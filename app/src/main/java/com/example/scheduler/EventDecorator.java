@@ -27,7 +27,6 @@ public class EventDecorator extends AppCompatActivity implements DayViewDecorato
         this.color = color;
 
     }
-
      */
 
     @Override
