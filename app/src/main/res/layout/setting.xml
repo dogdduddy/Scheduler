@@ -9,9 +9,8 @@
     <!-- 설정화면 전용 Fragment -->
     <fragment
         android:id="@+id/frag_setting"
+        android:name="com.example.scheduler.SettingFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.scheduler.SettingFragment">
-    </fragment>
+        android:layout_height="match_parent"></fragment>
 
 </RelativeLayout>

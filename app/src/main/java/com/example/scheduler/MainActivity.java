@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
                                 return true;
                         }
                     }
+
                     @Override
                     public void onMenuModeChange(@NonNull MenuBuilder menu) {
                     }
@@ -158,20 +159,21 @@ public class MainActivity extends AppCompatActivity implements OnMonthChangedLis
     // by병선, "달력의 month 이동 시의 이벤트", 210702
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-        TextView toolMonth = (TextView)findViewById(R.id.toolMonth);
-        TextView toolYear = (TextView)findViewById(R.id.toolYear);
+        TextView toolMonth = (TextView) findViewById(R.id.toolMonth);
+        TextView toolYear = (TextView) findViewById(R.id.toolYear);
         // 그냥 6, 7 로 출력 되어서 0을 붙여줌
-        if(date.getMonth() <= 9)
-            toolMonth.setText("0"+String.valueOf(date.getMonth()));
+        if (date.getMonth() <= 9)
+            toolMonth.setText("0" + String.valueOf(date.getMonth()));
 
         else if (date.getMonth() > 9)
             toolMonth.setText(String.valueOf(date.getMonth()));
 
         toolYear.setText(String.valueOf(date.getYear()));
     }
+
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-        Log.d("MainActivity", "/////////////////////////"+CalendarDay.today());
+        Log.d("MainActivity", "/////////////////////////" + CalendarDay.today());
     }
 }

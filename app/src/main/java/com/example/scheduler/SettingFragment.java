@@ -61,7 +61,7 @@ public class SettingFragment extends PreferenceFragment {
                 soundPrefernence.setSummary(prefs.getString("sound_list", ""));
             }
             if (key.equals("letter_style_change")) {
-               letterstylePrefernence.setSummary(prefs.getString("letter_style_change", ""));
+                letterstylePrefernence.setSummary(prefs.getString("letter_style_change", ""));
             }
             if (key.equals("letter_size_change")) {
                 lettersizePrefernence.setSummary(prefs.getString("letter_size_change", ""));

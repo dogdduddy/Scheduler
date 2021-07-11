@@ -18,7 +18,7 @@ public class ListView_Notice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
-        notice = (ListView)findViewById(R.id.list1); // 리스트뷰 아이디 가져옴
+        notice = (ListView) findViewById(R.id.list1); // 리스트뷰 아이디 가져옴
         // (ListView)를 적어주는 이유 : findviewbyid 앞에 선언한 변수의 타입이랑 일치시켜야함
 
         List<String> data = new ArrayList<>(); // ArrayList 배열안에 String 형태로 넣겠다 // 데이터를 저장하는 리스트 생성

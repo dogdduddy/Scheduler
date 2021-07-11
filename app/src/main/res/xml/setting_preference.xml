@@ -29,10 +29,10 @@
                 android:title="회원 탈퇴" />
         </PreferenceScreen>
 
-        <PreferenceScreen
-                android:title="공지사항">
-                <intent android:targetPackage="com.example.scheduler"
-                    android:targetClass="com.example.scheduler.ListView_Notice"/>
+        <PreferenceScreen android:title="공지사항">
+            <intent
+                android:targetClass="com.example.scheduler.ListView_Notice"
+                android:targetPackage="com.example.scheduler" />
         </PreferenceScreen>
 
         <SwitchPreference
@@ -51,11 +51,11 @@
 
             <ListPreference
                 android:dependency="sound"
+                android:entries="@array/sound_notice"
+                android:entryValues="@array/sound_notice"
                 android:key="sound_list"
                 android:summary=""
-                android:title="알림음"
-                android:entries="@array/sound_notice"
-                android:entryValues="@array/sound_notice"/>
+                android:title="알림음" />
         </PreferenceScreen>
 
         <PreferenceScreen
