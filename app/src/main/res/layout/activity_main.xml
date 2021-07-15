@@ -21,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="1 입력해주세요."
+                android:visibility="invisible"
                 android:text=""
                 android:id="@+id/editText1"
                 />
@@ -28,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="2 입력해주세요."
+                android:visibility="invisible"
                 android:text=""
                 android:id="@+id/editText2"
                 />
@@ -35,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="3 입력해주세요."
+                android:visibility="invisible"
                 android:text=""
                 android:id="@+id/editText3"
                 />
@@ -51,6 +54,8 @@
                 app:mcv_tileWidth="50dp"
                 android:layout_marginTop="350dp"
                 app:mcv_showOtherDates="out_of_range"
+                app:mcv_selectionColor="@color/green"
+                app:mcv_dateTextAppearance="@color/white"
                 />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -9,6 +9,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView toolMonth;
     MaterialCalendarView materialCalendarView;
 
+    EditText editText1;
+    EditText editText2;
+    EditText editText3;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +61,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavBar();
         ToolMonthInit();
         CalendarInit();
-        //AddDecorator();
-        ChangeText();
     }
-    public void ChangeText() {
-        EditText editText1 = (EditText)findViewById(R.id.editText1);
-        EditText editText2 = (EditText)findViewById(R.id.editText2);
-        EditText editText3 = (EditText)findViewById(R.id.editText3);
+    // by병선, "day 클릭 시의 이벤트", 210702
+    @Override
+    public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
+         editText1.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText3.setVisibility(View.VISIBLE);
+        Log.d("MainActivity", "1111111/// "+date);
+        editText1.addTextChangedListener(test(date));
+        editText2.addTextChangedListener(test(date));
+        editText3.addTextChangedListener(test(date));
+    }
 
-        editText1.addTextChangedListener(test());
-        editText2.addTextChangedListener(test());
-        editText3.addTextChangedListener(test());
-    }
-    public TextWatcher test() {
+    private TextWatcher test(CalendarDay date ) {
+        Log.d("MainActivity", "2222222/// "+date);
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,32 +84,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                TextView editText1 = findViewById(R.id.editText1);
-                TextView editText2 = findViewById(R.id.editText2);
-                TextView editText3 = findViewById(R.id.editText3);
+                boolean[] dotList = {false, false, false, false, false, false};
+                ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
-                ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-                ArrayList<Integer> dotColorList = new ArrayList<>();
+                if(!((editText1.getText().toString().length()) == 0))
+                    dotList[0] = true;
+                if(!((editText2.getText().toString().length()) == 0))
+                    dotList[1] = true;
+                if(!((editText3.getText().toString().length()) == 0))
+                    dotList[2] = true;
+                Log.d("MainActivity", "333333/// "+date);
 
-                // dot 중복 표시. array말고  그냥 배열은 어떤가? 6개 고정이므로
+                calendarDays.add(date);
 
-                if(!((editText1.getText().toString().length()) == 0)) {
-                    dotColorList.add(Color.GREEN);
-                    calendarDayList.add(CalendarDay.from(2021,07,01));
-
-                    AddDecorator(calendarDayList, dotColorList);
-                }if(!((editText2.getText().toString().length()) == 0)) {
-                    dotColorList.add(Color.RED);
-                    calendarDayList.add(CalendarDay.from(2021,07,02));
-
-                    AddDecorator(calendarDayList, dotColorList);
-                }if(!((editText3.getText().toString().length()) == 0)) {
-                    dotColorList.add(Color.BLACK);
-                    calendarDayList.add(CalendarDay.from(2021,07,03));
-
-                    AddDecorator(calendarDayList, dotColorList);
-                }
-
+                AddDecorator(dotList, calendarDays);
             }
 
             @Override
@@ -110,12 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
     }
     // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
-    private void AddDecorator(ArrayList<CalendarDay> calendarDayList, ArrayList<Integer> dotColorList) {
-
-        materialCalendarView.addDecorator(new EventDecorator(dotColorList, calendarDayList));
-
-        //  day 클릭 시 원
-        materialCalendarView.setSelectionColor(Color.RED);
+    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays) {
+        Log.d("MainActivity", "4444444/// "+calendarDays);
+        materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays));
     }
 
     public void NavBar() {
@@ -182,14 +176,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolYear.setText(String.valueOf(date.getYear()));
     }
-    // by병선, "day 클릭 시의 이벤트", 210702
-    @Override
-    public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-        Log.d("MainActivity", "/////////////////////////"+date.getDay());
-    }
+
 
     // by병선, "캘린더 설정 초기화", 210707
     private  void CalendarInit() {
+        editText1 = (EditText)findViewById(R.id.editText1);
+        editText2 = (EditText)findViewById(R.id.editText2);
+        editText3 = (EditText)findViewById(R.id.editText3);
+
+
+        //  day 클릭 시 원
+        materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_SINGLE);
+        materialCalendarView.setSelectionColor(Color.GREEN);
         //by병선, "dateChange, monthChange 메소드 사용 코드", 210702
         materialCalendarView.setOnDateChangedListener(this);
         materialCalendarView.setOnMonthChangedListener(this);
