@@ -79,7 +79,7 @@ public class CustomMultipleDotSpan extends AppCompatActivity implements LineBack
             leftMost = cnt * -5;
         // pain1은 Dot 뿐만 아니라 배경 텍스트 색에도 영향을 줌
         paint2.setColor(Color.WHITE);
-        canvas.drawRect(middle-23,bottom-3,middle+33, bottom+3,paint2);
+        canvas.drawRect(middle-23,bottom-3,middle+33, bottom+13,paint2);
 
         for (int i = 0; i < cnt; i++) {
             int oldColor = paint1.getColor();
