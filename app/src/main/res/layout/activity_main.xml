@@ -17,7 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
-
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="1 입력해주세요."
+                android:visibility="invisible"
+                android:text=""
+                android:id="@+id/editText1"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="2 입력해주세요."
+                android:visibility="invisible"
+                android:text=""
+                android:id="@+id/editText2"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="3 입력해주세요."
+                android:visibility="invisible"
+                android:text=""
+                android:id="@+id/editText3"
+                />
             <include
                 layout="@layout/toolbar"
                 android:id="@+id/toolbar"/>
@@ -31,6 +54,8 @@
                 app:mcv_tileWidth="50dp"
                 android:layout_marginTop="350dp"
                 app:mcv_showOtherDates="out_of_range"
+                app:mcv_selectionColor="@color/green"
+                app:mcv_dateTextAppearance="@color/white"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
