@@ -8,10 +8,13 @@ import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.os.Build;
 import android.text.style.LineBackgroundSpan;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +24,7 @@ public class CustomMultipleDotSpan extends AppCompatActivity implements LineBack
     private final float radius;
     private boolean[] dotList;
     private int[] ColorList;
+
 
     public CustomMultipleDotSpan() {
         this.radius = DEFAULT_RADIUS;
@@ -51,6 +55,7 @@ public class CustomMultipleDotSpan extends AppCompatActivity implements LineBack
             CharSequence charSequence,
             int start, int end, int lineNum
     ) {
+        Log.d("MainActivity", "Test decorator 11111111");
         // 부채꼴 그리기용
         RectF rect = new RectF();
         // dotList는 6개로 선언 된 배열이므로 true의 갯수를 확인함
@@ -79,7 +84,10 @@ public class CustomMultipleDotSpan extends AppCompatActivity implements LineBack
             leftMost = cnt * -5;
         // pain1은 Dot 뿐만 아니라 배경 텍스트 색에도 영향을 줌
         paint2.setColor(Color.WHITE);
-        canvas.drawRect(middle-23,bottom-3,middle+33, bottom+13,paint2);
+        //canvas.drawRect(middle-23,bottom-3,middle+33, bottom+13,paint2);
+
+        //here
+        //((MainActivity)MainActivity.mContext).DecoratorClear(decorator);
 
         for (int i = 0; i < cnt; i++) {
             int oldColor = paint1.getColor();

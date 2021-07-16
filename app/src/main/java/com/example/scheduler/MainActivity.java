@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView toolMonth;
     MaterialCalendarView materialCalendarView;
 
+    public static Context mContext;
+
     EditText editText1;
     EditText editText2;
     EditText editText3;
@@ -55,17 +58,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // 다른 클래스에서 MainClass 메서드 호출하기 위해
+        mContext = this;
 
         materialCalendarView = findViewById(R.id.calendarView);
-
         NavBar();
         ToolMonthInit();
         CalendarInit();
+
     }
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-         editText1.setVisibility(View.VISIBLE);
+        editText1.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         editText3.setVisibility(View.VISIBLE);
         Log.d("MainActivity", "1111111/// "+date);
@@ -75,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private TextWatcher test(CalendarDay date ) {
+        final boolean[][] preDeco = {new boolean[6]};
+        final boolean[] preDecoCheck = new boolean[1];
         Log.d("MainActivity", "2222222/// "+date);
         return new TextWatcher() {
             @Override
@@ -84,7 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 boolean[] dotList = {false, false, false, false, false, false};
+
                 ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
                 if(!((editText1.getText().toString().length()) == 0))
@@ -95,9 +104,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     dotList[2] = true;
                 Log.d("MainActivity", "333333/// "+date);
 
+                if(preDeco[0] == dotList)
+                    preDecoCheck[0] = true;
+                else
+                    preDecoCheck[0] = false;
+
                 calendarDays.add(date);
 
-                AddDecorator(dotList, calendarDays);
+                AddDecorator(dotList, calendarDays, preDecoCheck[0]);
+                preDeco[0] = dotList;
             }
 
             @Override
@@ -107,9 +122,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
     }
     // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
-    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays) {
+    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays, boolean preDecoCheck) {
         Log.d("MainActivity", "4444444/// "+calendarDays);
-        materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays));
+        materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
     }
 
     public void NavBar() {
@@ -184,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editText2 = (EditText)findViewById(R.id.editText2);
         editText3 = (EditText)findViewById(R.id.editText3);
 
-
         //  day 클릭 시 원
         materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_SINGLE);
         materialCalendarView.setSelectionColor(Color.GREEN);
@@ -206,6 +220,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String getTime = sdf.format(date);
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5));
+    }
+    public void DecoratorClear(DayViewDecorator decorator) {
+        materialCalendarView.removeDecorator(decorator);
+        Log.d("MainActivity", "Test decorator 222222");
     }
 }
 
