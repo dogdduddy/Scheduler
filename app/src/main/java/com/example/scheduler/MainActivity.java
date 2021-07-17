@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavBar();
         ToolMonthInit();
         CalendarInit();
+        Intent intent = new Intent(MainActivity.this, slide.class);
+        startActivity(intent);
 
     }
     // by병선, "day 클릭 시의 이벤트", 210702
