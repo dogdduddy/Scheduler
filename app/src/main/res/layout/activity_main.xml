@@ -129,11 +129,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="안녕하세요"
-                android:id="@+id/et_placeName"/>
         </RelativeLayout>
 
     </LinearLayout>
