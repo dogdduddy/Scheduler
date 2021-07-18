@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String getTime = sdf.format(date);
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5,7));
-
+        // todoMonth 초기화
         TextView todoMonth = findViewById(R.id.todoMonth);
         String text = getTime.substring(5,7) + "." + getTime.substring(8);
         todoMonth.setText(text);
