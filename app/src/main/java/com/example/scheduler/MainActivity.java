@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +19,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +39,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.w3c.dom.Text;
 
@@ -48,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MaterialCalendarView materialCalendarView;
 
     public static Context mContext;
-
     EditText editText1;
     EditText editText2;
     EditText editText3;
+    GestureDetector gestureDetector = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -62,12 +69,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mContext = this;
 
         materialCalendarView = findViewById(R.id.calendarView);
-        NavBar();
+
         ToolMonthInit();
         CalendarInit();
-        Intent intent = new Intent(MainActivity.this, slide.class);
-        startActivity(intent);
 
+        SlidingUpPanelLayout gestureView = findViewById(R.id.main_panel);
+        gestureView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetector.onTouchEvent(event);
+                return false;
+            }
+        });
+        gestureDetector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                Log.d("MainActivity", "제스쳐 Down!!!!!");
+                return true;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+                Log.d("MainActivity", "제스쳐 onShowPress!!!");
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                Log.d("MainActivity", "제스쳐 onScroll!!!");
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                Log.d("MainActivity", "제스쳐 onLongPress !!!");
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                Log.d("MainActivity", "제스쳐 onFling");
+                return true;
+            }
+        });
     }
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
@@ -129,26 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
     }
 
-    public void NavBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.openNavDrawer,
-                R.string.closeNavDrawer
-        );
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
 
 
     @Override
@@ -177,8 +204,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "설정 페이지 입니다.", Toast.LENGTH_SHORT).show();
             // 햄버거에서 세팅 클릭했을 때 나오는 텍스트
         }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -196,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     // by병선, "캘린더 설정 초기화", 210707
-    private  void CalendarInit() {
+    public  void CalendarInit() {
         editText1 = (EditText)findViewById(R.id.editText1);
         editText2 = (EditText)findViewById(R.id.editText2);
         editText3 = (EditText)findViewById(R.id.editText3);
@@ -212,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // by병선, "ToolBar 연,월 초기화", 210707
-    private void ToolMonthInit() {
+    public void ToolMonthInit() {
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
         toolYear= (TextView)findViewById(R.id.toolYear);
         toolMonth = (TextView)findViewById(R.id.toolMonth);
@@ -226,6 +251,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
         Log.d("MainActivity", "Test decorator 222222");
+    }
+
+    // BottomSlideUp ReSize
+    public void FullSize() {
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        setLayout(height);
+    }
+
+    public void HalfSize() {
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 450, getResources().getDisplayMetrics());
+        setLayout(height);
+    }
+
+    private void setLayout(int height) {
+        LinearLayout linearLayout = findViewById(R.id.drawer);
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+
+        SlidingUpPanelLayout.LayoutParams params = new SlidingUpPanelLayout.LayoutParams(width, height);
+        linearLayout.setLayoutParams(params);
     }
 }
 

@@ -18,20 +18,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+       <!--
         <fragment
             android:id="@+id/fragment_map"
             android:name="com.example.scheduler.SettingFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:id="@+id/btn_list"
-            android:text="목록"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="30dp"/>
+
+            -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frame_map"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
         android:id="@+id/drawer"
