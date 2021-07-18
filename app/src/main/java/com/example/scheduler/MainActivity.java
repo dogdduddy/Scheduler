@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
         // 그냥 6, 7 로 출력 되어서 0을 붙여줌
+
         if(date.getMonth() <= 9)
             toolMonth.setText("0"+String.valueOf(date.getMonth()));
         else if (date.getMonth() > 9)
@@ -243,11 +244,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolMonth = (TextView)findViewById(R.id.toolMonth);
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String getTime = sdf.format(date);
         toolYear.setText(getTime.substring(0,4));
-        toolMonth.setText(getTime.substring(5));
+        toolMonth.setText(getTime.substring(5,7));
+
+        TextView todoMonth = findViewById(R.id.todoMonth);
+        String text = getTime.substring(5,7) + "." + getTime.substring(8);
+        todoMonth.setText(text);
     }
+
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
         Log.d("MainActivity", "Test decorator 222222");
