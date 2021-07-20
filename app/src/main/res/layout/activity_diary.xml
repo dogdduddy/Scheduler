@@ -15,6 +15,7 @@
                 android:src="@drawable/home_btn"
                 app:layout_editor_absoluteX="50dp"
                 app:layout_editor_absoluteY="50dp" />
+
 <!-- 페이지 자체가 리니어레이아웃이면 가능
     <GridView
         android:id="@+id/gird_view_image"

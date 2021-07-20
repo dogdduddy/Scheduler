@@ -20,7 +20,7 @@
         <item>H</item>
     </string-array>
 
-    <!-- 현수 글씨체 크기 변경 목록-->
+    <!-- 현수 글씨 크기 변경 목록-->
     <string-array name="size">
         <item>크게</item>
         <item>보통</item>
