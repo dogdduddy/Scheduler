@@ -15,7 +15,17 @@
                 android:src="@drawable/home_btn"
                 app:layout_editor_absoluteX="50dp"
                 app:layout_editor_absoluteY="50dp" />
-
+<!-- 페이지 자체가 리니어레이아웃이면 가능
+    <GridView
+        android:id="@+id/gird_view_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/diary_add_btn"
         android:layout_width="wrap_content"
@@ -24,4 +34,7 @@
         app:srcCompat="@android:drawable/ic_input_add"
         android:backgroundTint="@color/white"/>
 
+
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
