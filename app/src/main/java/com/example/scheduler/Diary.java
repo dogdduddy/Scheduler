@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
@@ -41,6 +43,25 @@ public class Diary extends AppCompatActivity {
         menuBuilder = new MenuBuilder(this);
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.popupmenu, menuBuilder);
+
+        FloatingActionButton addbtn = findViewById(R.id.diary_add_btn);
+        addbtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                intent = new Intent(Diary.this, MakeDiary.class);
+                startActivity(intent);
+            }
+
+            /* 스낵바 // 토스트랑 비슷 한 기능 // 밑에서 화면 조금 올라옴
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            */
+        });
 
         menu_show.setOnClickListener(new View.OnClickListener() {
             @Override
