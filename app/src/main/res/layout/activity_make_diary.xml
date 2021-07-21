@@ -6,16 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MakeDiary">
 
-
     <ImageView
         android:id="@+id/image"
-        android:layout_width="295dp"
-        android:layout_height="288dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/diary_text"
         app:srcCompat="@drawable/ic_baseline_image_24"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="VectorDrawableCompat"
+        android:background="@drawable/sun"/>
+
+    <EditText
+        android:id="@+id/diary_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:hint="#성공적 #수강신청 #다음학기 #개꿀"
+        android:textColor="#FF000000"
+        android:textSize="20dp"
+        android:maxLines="1"
+        android:maxLength="20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        android:background="@null"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
