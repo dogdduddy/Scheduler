@@ -57,9 +57,7 @@ public class MakeDiary extends AppCompatActivity {
             resizeBitmap=bitmap;
             //당 메소드로 리사이즈된 이미지의 넓이와 높이를 보면 핸드폰을 가로로 놓고 찍은 사진은 넓이가 넓고,
             // 세로로 놓고 찍은 사진은 높이가 높기때문에 같은 이미지로 2번에서 넓이와 높이가 원하는 사이즈보다 작아지기 전까지 수행합니다.
-            //그래야 이미지의 원본 화질을 최대한 보존할 수 있습니다. ( 본래 크기보다 억지로 늘릴려고 한다면 사진은 깨집니다.
-
-
+            //그래야 이미지의 원본 화질을 최대한 보존할 수 있습니다. 본래 크기보다 억지로 늘릴려고 한다면 사진은 깨집니다.
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
