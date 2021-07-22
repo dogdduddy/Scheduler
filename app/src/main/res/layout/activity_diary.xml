@@ -7,35 +7,40 @@
     android:background="@color/white"
     tools:context=".Diary">
 
-            <ImageView
-                android:id="@+id/menu_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_shape"
-                android:src="@drawable/home_btn"
-                app:layout_editor_absoluteX="50dp"
-                app:layout_editor_absoluteY="50dp" />
+    <ImageView
+        android:id="@+id/menu_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_shape"
+        android:src="@drawable/home_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!-- 페이지 자체가 리니어레이아웃이면 가능
-    <GridView
-        android:id="@+id/gird_view_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
--->
+
+    <!-- 페이지 자체가 리니어레이아웃이면 가능
+        <GridView
+            android:id="@+id/gird_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+    -->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/diary_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/white"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

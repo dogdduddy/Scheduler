@@ -99,6 +99,7 @@ public class Diary extends AppCompatActivity {
                                 return true;
                         }
                     }
+
                     @Override
                     public void onMenuModeChange(@NonNull MenuBuilder menu) {
                     }
