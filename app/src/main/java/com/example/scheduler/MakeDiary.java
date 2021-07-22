@@ -2,6 +2,7 @@ package com.example.scheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -84,14 +85,15 @@ public class MakeDiary extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 갤러리
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 try {
 
                     Uri uri = data.getData();
-                    Glide.with(getApplicationContext()).load(uri).into(imageView); // 이미지 사진 넣기
+                    Glide.with(getApplicationContext()).load(uri)./*override(500,500). 이미지 사이즈 조정인데 안됨*/
+                            into(imageView); // 이미지 사진 넣기
 
                 } catch (Exception e) {
 
