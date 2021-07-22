@@ -24,8 +24,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/btn_shape"
-                android:src="@drawable/home_btn"
+                app:srcCompat="@drawable/ic_home"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

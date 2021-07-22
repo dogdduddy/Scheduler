@@ -12,6 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary=true; // 벡터에셋때문에 사용해준 것
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
