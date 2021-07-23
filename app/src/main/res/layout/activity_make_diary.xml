@@ -13,7 +13,8 @@
         android:layout_marginRight="15dp"
         android:text="V"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/diarybtn"/>
 
     <ImageView
         android:id="@+id/image"
@@ -22,13 +23,15 @@
         android:layout_marginTop="80dp"
         android:background="@drawable/sun"
         android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/diary_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_image_24"
         tools:ignore="VectorDrawableCompat" />
-    <!--android:scaleType="centerInside"-->
+    <!--android:scaleType="centerInside"
+       android:adjustViewBounds="true" // 가로 세로 ratio 비율 맞추기-->
 
     <EditText
         android:id="@+id/diary_text"
