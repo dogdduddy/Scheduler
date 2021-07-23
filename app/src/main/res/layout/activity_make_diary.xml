@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MakeDiary">
 
     <Button
@@ -17,21 +18,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/nocolorfilm"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:background="@drawable/ic_nocolor_film"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/image"
-        android:layout_width="325dp"
-        android:layout_height="360dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="272dp"
+        android:layout_height="278dp"
+        android:layout_margin="50dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/sun"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/nocolorfilm"
         app:layout_constraintBottom_toTopOf="@+id/diary_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/nocolorfilm"
         app:srcCompat="@drawable/ic_baseline_image_24"
         tools:ignore="VectorDrawableCompat" />
     <!--android:scaleType="centerInside"
-       android:adjustViewBounds="true" // 가로 세로 ratio 비율 맞추기-->
+       android:adjustViewBounds="true" // 가로 세로 ratio 비율 맞추기 -->
 
     <EditText
         android:id="@+id/diary_text"
@@ -48,5 +58,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <EditText
+        android:id="@+id/diary_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fontFamily="sans-serif-medium"
+        android:hint="내용을 입력해주세요"
+        android:maxLength="100"
+        android:maxLines="5"
+        android:textColor="#FF000000"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nocolorfilm" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

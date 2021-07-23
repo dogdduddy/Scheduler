@@ -100,8 +100,8 @@ public class MakeDiary extends Activity implements OnClickListener {
                 intent.setDataAndType(mImageCaptureUri, "image/*");
 
                 // CROP할 이미지를 200*200 크기로 저장
-                intent.putExtra("outputX", 300); // CROP한 이미지의 x축 크기
-                intent.putExtra("outputY", 300); // CROP한 이미지의 y축 크기
+                intent.putExtra("outputX", 100); // CROP한 이미지의 x축 크기
+                intent.putExtra("outputY", 100); // CROP한 이미지의 y축 크기
                 intent.putExtra("aspectX", 1); // CROP 박스의 X축 비율
                 intent.putExtra("aspectY", 1); // CROP 박스의 Y축 비율
                 intent.putExtra("scale", true);
