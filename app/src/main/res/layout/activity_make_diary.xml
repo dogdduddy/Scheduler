@@ -45,12 +45,13 @@
 
     <EditText
         android:id="@+id/diary_text"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@null"
         android:fontFamily="sans-serif-medium"
-        android:hint="#성공적 #수강신청 #다음학기 #개꿀"
+        android:gravity="center"
+        android:hint="#성공 #수강신청 #다음학기 #개꿀"
         android:maxLength="20"
         android:maxLines="1"
         android:textColor="#FF000000"
@@ -61,12 +62,13 @@
 
     <EditText
         android:id="@+id/diary_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
         android:background="@null"
         android:fontFamily="sans-serif-medium"
         android:hint="내용을 입력해주세요"
-        android:maxLength="100"
+        android:gravity="center"
+        android:maxLength="500"
         android:maxLines="5"
         android:textColor="#FF000000"
         android:textSize="20dp"
