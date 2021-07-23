@@ -19,6 +19,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class MakeDiary extends Activity implements OnClickListener {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_GALLERY = 1;
@@ -27,19 +29,16 @@ public class MakeDiary extends Activity implements OnClickListener {
 
     private Uri mImageCaptureUri;
     private ImageView mPhotoImageView;
-    private Button btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_diary);
 
-        btn = (Button) findViewById(R.id.diarybtn);
-        mPhotoImageView = (ImageView) findViewById(R.id.image);
+        mPhotoImageView = (ImageView) this.findViewById(R.id.image);
 
-        btn.setOnClickListener(this);
+        mPhotoImageView.setOnClickListener(this);
     }
-
 
     // 앨범에서 이미지 가져오기
 
@@ -91,7 +90,6 @@ public class MakeDiary extends Activity implements OnClickListener {
 
                 mImageCaptureUri = data.getData();
                 Log.d("SmartWheel", mImageCaptureUri.getPath().toString()); // 요건 모르겠다
-
             }
 
             case PICK_FROM_CAMERA: {
