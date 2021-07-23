@@ -7,23 +7,23 @@
     tools:context=".MakeDiary">
 
     <Button
+        android:id="@+id/diarybtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:text="V"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/diarybtn"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="325dp"
         android:layout_height="360dp"
         android:layout_marginTop="80dp"
+        android:adjustViewBounds="true"
         android:background="@drawable/sun"
         android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/diary_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

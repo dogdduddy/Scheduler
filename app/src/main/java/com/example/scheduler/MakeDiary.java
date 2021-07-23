@@ -41,7 +41,7 @@ public class MakeDiary extends Activity implements OnClickListener {
     }
 
 
-     // 앨범에서 이미지 가져오기
+    // 앨범에서 이미지 가져오기
 
     private void doTakeAlbumAction() {
         // 앨범 호출
@@ -90,7 +90,7 @@ public class MakeDiary extends Activity implements OnClickListener {
                 // 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
 
                 mImageCaptureUri = data.getData();
-                Log.d("SmartWheel",mImageCaptureUri.getPath().toString()); // 요건 모르겠다
+                Log.d("SmartWheel", mImageCaptureUri.getPath().toString()); // 요건 모르겠다
 
             }
 
