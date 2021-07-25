@@ -9,7 +9,7 @@
     <PreferenceCategory android:title="환경설정">
 
         <PreferenceScreen
-            android:icon="@drawable/flower"
+            android:icon="@drawable/profile_icon"
             android:key="change_profile"
             android:summary=""
             android:title="프로필 변경하기">
@@ -29,7 +29,8 @@
                 android:title="회원 탈퇴" />
         </PreferenceScreen>
 
-        <PreferenceScreen android:title="공지사항">
+        <PreferenceScreen android:title="공지사항"
+            android:icon="@drawable/notice_icon">
             <intent
                 android:targetClass="com.example.scheduler.ListView_Notice"
                 android:targetPackage="com.example.scheduler" />
@@ -38,9 +39,11 @@
         <SwitchPreference
             android:key="pw"
             android:summary=""
-            android:title="비밀번호" />
+            android:title="비밀번호"
+            android:icon="@drawable/pw_icon"/>
 
         <PreferenceScreen
+            android:icon="@drawable/alarm_icon"
             android:key="notification_method"
             android:summary="소리/진동/무음"
             android:title="알림">
@@ -59,6 +62,7 @@
         </PreferenceScreen>
 
         <PreferenceScreen
+            android:icon="@drawable/text_icon"
             android:key="letter_style"
             android:summary=""
             android:title="글자 스타일">
@@ -78,13 +82,38 @@
                 android:title="글자 크기 변경" />
         </PreferenceScreen>
 
+        <ListPreference
+            android:key="backup_restore"
+            android:title="백업/복원"
+            android:summary=""
+            android:icon="@drawable/backup_restore_icon"/>
+
+        <ListPreference
+            android:key="send_opinion"
+            android:title="의견 보내기"
+            android:summary=""
+            android:icon="@drawable/send_opinion_icon"/>
+
+        <ListPreference
+            android:key="backup_restore"
+            android:title="앱 평가하기"
+            android:summary=""
+            android:icon="@drawable/app_rate_icon"/>
+
+        <ListPreference
+            android:key="backup_restore"
+            android:title="인스타그램"
+            android:summary=""
+            android:icon="@drawable/instargram_icon"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="개발자">
         <ListPreference
             android:key="help"
             android:summary=""
-            android:title="도움말" />
+            android:title="도움말"
+            android:icon="@drawable/help_icon"/>
 
         <ListPreference
             android:key="bug_report"
@@ -92,9 +121,16 @@
             android:title="버그 리포트" />
 
         <ListPreference
-            android:key="버전 정보"
+            android:key="cheering"
             android:summary=""
-            android:title="0.0.1" />
+            android:title="응원하기"
+            android:icon="@drawable/cheer_icon"/>
+
+        <ListPreference
+            android:key="app_version"
+            android:summary=""
+            android:title="앱 버전 0.0.1"
+            android:icon="@drawable/app_version_icon"/>
 
     </PreferenceCategory>
 

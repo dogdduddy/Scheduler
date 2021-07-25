@@ -21,7 +21,7 @@
         android:id="@+id/nocolorfilm"
         android:layout_width="wrap_content"
         android:layout_height="450dp"
-        android:background="@drawable/ic_nocolor_film"
+        android:background="@drawable/no_color_film"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/nocolorfilm"
-        app:srcCompat="@drawable/ic_baseline_image_24"
+        app:srcCompat="@drawable/diary_picture"
         tools:ignore="VectorDrawableCompat" />
     <!--android:scaleType="centerInside"
        android:adjustViewBounds="true" // 가로 세로 ratio 비율 맞추기 -->
