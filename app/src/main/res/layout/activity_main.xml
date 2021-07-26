@@ -126,12 +126,35 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             />
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <!-- Todo 내용 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <FrameLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/frameSize">
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewpager"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/frameSize" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="뷰어 밑에 위치" />
+            </LinearLayout>
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
