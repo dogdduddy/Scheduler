@@ -7,11 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ViewPager extends AppCompatActivity {
+    private int oldPosition = 0;
+    private boolean checkCurrent = false;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -39,6 +42,33 @@ public class ViewPager extends AppCompatActivity {
                     mPager.setCurrentItem(position);
                 }
             }
+
+            @Override
+            public void onPageSelected(int position) {
+                int newPosition = position;
+                int compaire = newPosition - oldPosition;
+
+                super.onPageSelected(position);
+
+                Log.d("MainActivity", "old  : "+ oldPosition);
+                Log.d("MainActivity", "new  : "+ newPosition);
+
+                // 두 수의 차가 -, + 인지로 위치 확인
+                if(compaire > 0 ) {
+                    if(checkCurrent)
+                        Log.d("MainActivity", "LTR -");
+                    Log.d("MainActivity", "RTL +");
+
+                }
+                else {
+                    if(checkCurrent)
+                        Log.d("MainActivity", "RTL +");
+                    Log.d("MainActivity", "LTR -");
+                }
+
+                oldPosition = newPosition;
+                checkCurrent = false;
+            }
         });
 
         final float pageMargin= getResources().getDimensionPixelOffset(R.dimen.pageMargin);
@@ -47,6 +77,7 @@ public class ViewPager extends AppCompatActivity {
         mPager.setPageTransformer(new ViewPager2.PageTransformer() {
             @Override
             public void transformPage(@NonNull @NotNull View page, float position) {
+                // 좌우 미리보기 없앨려면 offset에 곱하는 2 없애기
                 float myOffset = position * -(2 * pageOffset + pageMargin);
                 if (mPager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
                     if (ViewCompat.getLayoutDirection(mPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
