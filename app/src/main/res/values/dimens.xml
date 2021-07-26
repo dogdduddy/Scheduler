@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--값 커지면 좌우 미리보기 증가-->
+    <dimen name="pageMargin">0dp</dimen>
+    <dimen name="offset">0dp</dimen>
+    <!-- Width값 조절 가능 -->
+    <dimen name="pageMarginAndOffset">10dp</dimen>
+    <dimen name="frameSize">320dp</dimen>
+</resources>
