@@ -55,6 +55,7 @@ import java.util.PrimitiveIterator;
 
 // 메인 月달력과 함께 햄버거 등 툴바가 표시되는 페이지
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMonthChangedListener, OnDateSelectedListener {
+    // Calendar
     TextView toolYear;
     TextView toolMonth;
     MaterialCalendarView materialCalendarView;
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
 
+    //Sliding Panel
+    private SlidingUpPanelLayout gestureView;
+    private Date selectDay;
+    private TextView todoMonth;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ToolMonthInit();
         CalendarInit();
         // 투두 업 패ㅐ널
-        SlidingUpPanelLayout gestureView = findViewById(R.id.main_panel);
+        gestureView = findViewById(R.id.main_panel);
         gestureView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -198,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-        // 바꾸기
+        /*
         editText1.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         editText3.setVisibility(View.VISIBLE);
@@ -206,12 +212,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editText1.addTextChangedListener(test(date));
         editText2.addTextChangedListener(test(date));
         editText3.addTextChangedListener(test(date));
+         */
+        // SldingPanel up
+        gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+        // date 넘기기
+
+        // todoMonth에 들어갈 date format
+        String stringDate = date.toString();
+        String[] splitDate = stringDate.split("-");
+        splitDate[2] = splitDate[2].substring(0,splitDate[2].lastIndexOf("}"));
+        Log.d("MainActivity", "?a/a/a/a/a// " + splitDate[2]);
+        todoMonth.setText(splitDate[1] +"."+ splitDate[2]);
     }
 
     private TextWatcher test(CalendarDay date ) {
         final boolean[][] preDeco = {new boolean[6]};
         final boolean[] preDecoCheck = new boolean[1];
+
         Log.d("MainActivity", "2222222/// "+date);
+
+
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -329,7 +349,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5,7));
         // todoMonth 초기화
-        TextView todoMonth = findViewById(R.id.todoMonth);
+        todoMonth = findViewById(R.id.todoMonth);
         String text = getTime.substring(5,7) + "." + getTime.substring(8);
         todoMonth.setText(text);
     }
