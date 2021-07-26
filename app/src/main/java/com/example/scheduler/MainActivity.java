@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-        /*
+
         editText1.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         editText3.setVisibility(View.VISIBLE);
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editText1.addTextChangedListener(test(date));
         editText2.addTextChangedListener(test(date));
         editText3.addTextChangedListener(test(date));
-         */
+
         // SldingPanel up
         gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         // date 넘기기
@@ -243,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 boolean[] dotList = {false, false, false, false, false, false};
 
-                ArrayList<CalendarDay> calendarDays = new ArrayList<>();
+                // 중복 처리중
+                //ArrayList<CalendarDay> calendarDays = new ArrayList<>();
 
                 if(!((editText1.getText().toString().length()) == 0))
                     dotList[0] = true;
@@ -257,10 +258,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     preDecoCheck[0] = true;
                 else
                     preDecoCheck[0] = false;
+                // 중복 처리중
+                //calendarDays.add(date);
 
-                calendarDays.add(date);
-
-                AddDecorator(dotList, calendarDays, preDecoCheck[0]);
+                //AddDecorator(dotList, calendarDays, preDecoCheck[0]);
+                AddDecorator(dotList, date, preDecoCheck[0]);
                 preDeco[0] = dotList;
             }
 
@@ -271,8 +273,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
     }
     // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
-    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays, boolean preDecoCheck) {
+//    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays, boolean preDecoCheck) {
+    private void AddDecorator(boolean[] dotList, CalendarDay calendarDays, boolean preDecoCheck) {
         Log.d("MainActivity", "4444444/// "+calendarDays);
+        //materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
         materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
     }
 

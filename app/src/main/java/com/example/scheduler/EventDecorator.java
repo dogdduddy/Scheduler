@@ -26,14 +26,17 @@ public class EventDecorator extends AppCompatActivity implements DayViewDecorato
     private final Drawable drawable;
     private final boolean[] dotList;
     private final boolean preDecoCheck;
-    private final HashSet<CalendarDay> dates;
+    //private final HashSet<CalendarDay> dates;
+    private final CalendarDay date;
     private final int[] ColorList = {Color.GREEN, Color.RED, Color.BLACK,
             Color.BLUE, Color.GRAY, Color.parseColor("#8A2BE2")};
 
-    public EventDecorator(boolean[] dotList,Activity context, Collection<CalendarDay> dates, boolean preDecoCheck) {
+    //public EventDecorator(boolean[] dotList,Activity context, Collection<CalendarDay> dates, boolean preDecoCheck) {
+    public EventDecorator(boolean[] dotList,Activity context, CalendarDay date, boolean preDecoCheck) {
         drawable = context.getResources().getDrawable(R.drawable.calendar_background);
         this.dotList = dotList;
-        this.dates = new HashSet<>(dates);
+        //this.dates = new HashSet<>(dates);
+        this.date = date;
         this.preDecoCheck = preDecoCheck;
     }
     /*
@@ -48,7 +51,11 @@ public class EventDecorator extends AppCompatActivity implements DayViewDecorato
     @Override
     public boolean shouldDecorate(CalendarDay day) {
 
-        return  dates.contains(day);
+        //return  dates.contains(day);
+        if(date == day)
+            return true;
+        else
+            return false;
     }
 
     @Override
