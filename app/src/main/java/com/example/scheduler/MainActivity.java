@@ -337,16 +337,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         materialCalendarView.removeDecorator(decorator);
         Log.d("MainActivity", "Test decorator 222222");
     }
-
-
-
-    private void setLayout(int height) {
-        LinearLayout linearLayout = findViewById(R.id.drawer);
-        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-
-        SlidingUpPanelLayout.LayoutParams params = new SlidingUpPanelLayout.LayoutParams(width, height);
-        linearLayout.setLayoutParams(params);
-    }
 }
 
 
