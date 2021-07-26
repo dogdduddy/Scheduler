@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
+        // 바꾸기
         editText1.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         editText3.setVisibility(View.VISIBLE);
