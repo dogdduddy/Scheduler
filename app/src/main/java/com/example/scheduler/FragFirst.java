@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import org.jetbrains.annotations.NotNull;
 
 public class FragFirst extends Fragment {
@@ -21,7 +23,7 @@ public class FragFirst extends Fragment {
     }
 
     // newInstance constructor for creating fragment with arguments
-    public static FragFirst newInstance(int num){
+    public static FragFirst newInstance(int num, CalendarDay date){
         FragFirst fragment = new FragFirst();
         Bundle args = new Bundle();
         args.putInt("num",num);

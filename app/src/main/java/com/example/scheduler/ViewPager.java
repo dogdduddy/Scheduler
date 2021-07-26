@@ -26,7 +26,7 @@ public class ViewPager extends AppCompatActivity {
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
         //Adapter
-        pagerAdapter = new MyAdapter(this, num_page);
+        pagerAdapter = new MyAdapter(this);
         mPager.setAdapter(pagerAdapter);
 
         //ViewPager Setting

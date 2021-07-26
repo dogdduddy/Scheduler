@@ -67,16 +67,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GestureDetector gestureDetector = null;
 
     // ViewPager2
+    public CalendarDay getSelectDay = CalendarDay.today();
     private int oldPosition = 0;
     private boolean checkCurrent = false;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
-    private int num_page = 3;
 
     //Sliding Panel
     private SlidingUpPanelLayout gestureView;
-    private Date selectDay;
     private TextView todoMonth;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -137,19 +136,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
         //Adapter
-        pagerAdapter = new MyAdapter(this, num_page);
+        pagerAdapter = new MyAdapter(this);
         mPager.setAdapter(pagerAdapter);
 
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        mPager.setCurrentItem(1000);
         mPager.setOffscreenPageLimit(3);
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                //맨 처음 position 0으로 시작해서 third Fragment 보이는듯
                 if (positionOffsetPixels == 0) {
-                    mPager.setCurrentItem(position);
+                    if(position == 0)
+                        mPager.setCurrentItem(3,false);
+                    else if (position == 4)
+                        mPager.setCurrentItem(1 , false);
                 }
             }
 
@@ -165,15 +167,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 // 두 수의 차가 -, + 인지로 위치 확인
                 if(compaire > 0 ) {
-                    if(checkCurrent)
-                        Log.d("MainActivity", "LTR -");
-                    Log.d("MainActivity", "RTL +");
+                    //current로 강제로 옮기면서 2번 실행됨을 방지
+                    if(oldPosition != 0)
+                        Log.d("MainActivity", "RTL +");
 
                 }
                 else {
-                    if(checkCurrent)
-                        Log.d("MainActivity", "RTL +");
-                    Log.d("MainActivity", "LTR -");
+                    //current로 강제로 옮기면서 2번 실행됨을 방지
+                    if(oldPosition != 4)
+                        Log.d("MainActivity", "LTR -");
                 }
 
                 oldPosition = newPosition;
@@ -214,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editText3.addTextChangedListener(test(date));
 
         // SldingPanel up
-        gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+        //gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         // date 넘기기
 
         // todoMonth에 들어갈 date format
@@ -254,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     dotList[2] = true;
                 Log.d("MainActivity", "333333/// "+date);
 
-                if(preDeco[0] == dotList)
+                if(!(preDeco[0].length == 0))
                     preDecoCheck[0] = true;
                 else
                     preDecoCheck[0] = false;

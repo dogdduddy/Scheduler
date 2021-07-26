@@ -5,30 +5,35 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import org.jetbrains.annotations.NotNull;
 
 
 public class MyAdapter extends FragmentStateAdapter {
-    public int mCount;
+    private int[] ItemList = {0, 1, 2, 3, 4};
 
-    public MyAdapter(@NonNull @NotNull FragmentActivity fragmentActivity, int count) {
+    public MyAdapter(@NonNull @NotNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        mCount = count;
     }
 
     @NonNull
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-        int index = getRealPosition(position);
+        CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
 
-        switch(index) {
-            case 0:
-                return FragFirst.newInstance(index + 1);
+        if(position == 0)
+            position = 3;
+        else if(position == 4)
+            position = 1;
+        switch(position) {
             case 1:
-                return FragSecond.newInstance(index + 1);
+                return FragFirst.newInstance(position, date);
             case 2:
-                return FragThird.newInstance(index + 1);
+                return FragSecond.newInstance(position, date);
+            case 3:
+                return FragThird.newInstance(position, date);
             default:
                 return null;
         }
@@ -36,8 +41,7 @@ public class MyAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2000;
+        return ItemList.length;
     }
 
-    public int getRealPosition(int position) { return position % mCount; }
 }
