@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:background="#00FFFFFF"
+    app:umanoDragView="@id/drawer"
+    app:umanoPanelHeight="40dp"
+    app:umanoOverlay="true"
+    app:umanoShadowHeight="0dp"
+    tools:context=".slide"
+    app:umanoFadeColor="#00000000"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+       <!--
+        <fragment
+            android:id="@+id/fragment_map"
+            android:name="com.example.scheduler.SettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+            -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frame_map"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/drawer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="안녕하세요"
+                android:id="@+id/et_placeName"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
