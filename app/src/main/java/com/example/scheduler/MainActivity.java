@@ -338,16 +338,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("MainActivity", "Test decorator 222222");
     }
 
-    // BottomSlideUp ReSize
-    public void FullSize() {
-        int height = LinearLayout.LayoutParams.MATCH_PARENT;
-        setLayout(height);
-    }
 
-    public void HalfSize() {
-        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 450, getResources().getDisplayMetrics());
-        setLayout(height);
-    }
 
     private void setLayout(int height) {
         LinearLayout linearLayout = findViewById(R.id.drawer);
