@@ -47,6 +47,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,11 +83,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         // 다른 클래스에서 MainClass 메서드 호출하기 위해
         mContext = this;
-
         materialCalendarView = findViewById(R.id.calendarView);
+        todoMonth = findViewById(R.id.todoMonth);
 
         ToolMonthInit();
         CalendarInit();
+        SlidingPanelInit();
+
         // 투두 업 패ㅐ널
         gestureView = findViewById(R.id.main_panel);
         gestureView.setOnTouchListener(new View.OnTouchListener() {
@@ -159,14 +162,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 super.onPageSelected(position);
 
-                Log.d("MainActivity", "old  : "+ oldPosition);
-                Log.d("MainActivity", "new  : "+ newPosition);
-
                 // 두 수의 차가 -, + 인지로 위치 확인
                 if(compaire > 0 ) {
                     //current로 강제로 옮기면서 2번 실행됨을 방지
-                    if(oldPosition != 0)
+                    if(oldPosition != 0) {
                         Log.d("MainActivity", "RTL +");
+                    }
 
                 }
                 else {
@@ -203,30 +204,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "day 클릭 시의 이벤트", 210702
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
-
-        
-        Log.d("MainActivity", "1111111/// "+date);
-
-        // SldingPanel up
-        //gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-
-        // date 넘기기
-
-        // todoMonth에 들어갈 date format
-        String stringDate = date.toString();
-        String[] splitDate = stringDate.split("-");
-        splitDate[2] = splitDate[2].substring(0,splitDate[2].lastIndexOf("}"));
-        Log.d("MainActivity", "?a/a/a/a/a// " + splitDate[2]);
-        todoMonth.setText(splitDate[1] +"."+ splitDate[2]);
+        // 슬라이딩 패널 날짜 변경(클릭)
+        SlidingMonthChange(date);
+        try {
+            DateInc(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.d("MainActivity", "Testsss :"+date.toString());
     }
-
     private TextWatcher test(CalendarDay date ) {
         final boolean[][] preDeco = {new boolean[6]};
         final boolean[] preDecoCheck = new boolean[1];
-
-        Log.d("MainActivity", "2222222/// "+date);
-
-
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -271,7 +260,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
 //    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays, boolean preDecoCheck) {
     public void AddDecorator(boolean[] dotList, CalendarDay calendarDays, boolean preDecoCheck) {
-        Log.d("MainActivity", "4444444/// "+calendarDays);
         //materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
         materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
     }
@@ -333,9 +321,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
     }
-    private void SlidingPanelInit() {
-        //gestureView.isTouchEnabled(false);
-    }
     // by병선, "ToolBar 연,월 초기화", 210707
     private void ToolMonthInit() {
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
@@ -347,15 +332,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String getTime = sdf.format(date);
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5,7));
-        // todoMonth 초기화
-        todoMonth = findViewById(R.id.todoMonth);
-        String text = getTime.substring(5,7) + "." + getTime.substring(8);
-        todoMonth.setText(text);
+
     }
 
+    private void SlidingPanelInit() {
+        SlidingMonthChange(getSelectDay);
+    }
+    
+    public void SlidingMonthChange(CalendarDay date) {
+        // todoMonth에 들어갈 date format
+        String stringDate = date.toString();
+        String[] splitDate = stringDate.split("-");
+        splitDate[2] = splitDate[2].substring(0,splitDate[2].lastIndexOf("}"));
+        todoMonth.setText(splitDate[1] +"."+ splitDate[2]);
+    }
+
+    public void DateInc(CalendarDay dates) throws ParseException {
+        // CalendarDay 값 date로 변경 후 1증가. 그리고 다시 변환
+        String stringDate = dates.toString();
+        String[] splitDate = stringDate.split("-");
+        Date date;
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        Log.d("MainActivity", "DateInc 1 : " + dates);
+        if(splitDate[1].length() == 1)
+            splitDate[1] = "0" + Integer.parseInt(splitDate[1]);
+        if(splitDate[2].indexOf("}") == 1)
+            splitDate[2] = "0" + splitDate[2].substring(0,1);
+        else
+            splitDate[2] = splitDate[2].substring(0,2);
+        stringDate = splitDate[0].substring(splitDate[0].indexOf("{")+1) +"-"+ splitDate[1] +"-"+ splitDate[2];
+        date = transFormat.parse(stringDate);
+        Log.d("MainActivity", "DateInc 3 : " + transFormat.format(date));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 1);
+
+        Log.d("MainActivity", "DateInc 4 : " + cal.getTime());
+        //getSelectDay = CalendarDay.from(Integer.parseInt(splitDate[0]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[2]));
+    }
+
+    public void DateDec(CalendarDay date) {
+
+    }
+
+    // 점 지우기
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
-        Log.d("MainActivity", "Test decorator 222222");
     }
 }
 
