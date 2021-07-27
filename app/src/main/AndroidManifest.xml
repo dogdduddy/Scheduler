@@ -16,7 +16,6 @@
         <activity android:name=".Profile" />
         <activity android:name=".ListView_Notice" />
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" /> <!-- 크롭(자르기)-->
-            android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
