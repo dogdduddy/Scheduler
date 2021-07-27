@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MaterialCalendarView materialCalendarView;
 
     public static Context mContext;
-    EditText editText1;
-    EditText editText2;
-    EditText editText3;
     GestureDetector gestureDetector = null;
 
     // ViewPager2
@@ -207,16 +204,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
 
-        editText1.setVisibility(View.VISIBLE);
-        editText2.setVisibility(View.VISIBLE);
-        editText3.setVisibility(View.VISIBLE);
+        
         Log.d("MainActivity", "1111111/// "+date);
-        editText1.addTextChangedListener(test(date));
-        editText2.addTextChangedListener(test(date));
-        editText3.addTextChangedListener(test(date));
 
         // SldingPanel up
         //gestureView.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+
         // date 넘기기
 
         // todoMonth에 들어갈 date format
@@ -245,9 +238,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 boolean[] dotList = {false, false, false, false, false, false};
 
-                // 중복 처리중
+                // 중복 draw 문제 해결하기
                 //ArrayList<CalendarDay> calendarDays = new ArrayList<>();
-
+                /*
                 if(!((editText1.getText().toString().length()) == 0))
                     dotList[0] = true;
                 if(!((editText2.getText().toString().length()) == 0))
@@ -255,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(!((editText3.getText().toString().length()) == 0))
                     dotList[2] = true;
                 Log.d("MainActivity", "333333/// "+date);
-
+                 */
                 if(!(preDeco[0].length == 0))
                     preDecoCheck[0] = true;
                 else
@@ -274,9 +267,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
     }
+
     // by병선, "캘린더 일정 추가 효과 Dot 추가", 210707
 //    private void AddDecorator(boolean[] dotList, ArrayList<CalendarDay> calendarDays, boolean preDecoCheck) {
-    private void AddDecorator(boolean[] dotList, CalendarDay calendarDays, boolean preDecoCheck) {
+    public void AddDecorator(boolean[] dotList, CalendarDay calendarDays, boolean preDecoCheck) {
         Log.d("MainActivity", "4444444/// "+calendarDays);
         //materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
         materialCalendarView.addDecorator(new EventDecorator(dotList,this, calendarDays, preDecoCheck));
@@ -328,10 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     // by병선, "캘린더 설정 초기화", 210707
-    public  void CalendarInit() {
-        editText1 = (EditText)findViewById(R.id.editText1);
-        editText2 = (EditText)findViewById(R.id.editText2);
-        editText3 = (EditText)findViewById(R.id.editText3);
+    private void CalendarInit() {
 
         //  day 클릭 시 원
         materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_SINGLE);
@@ -342,9 +333,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
     }
-
+    private void SlidingPanelInit() {
+        //gestureView.isTouchEnabled(false);
+    }
     // by병선, "ToolBar 연,월 초기화", 210707
-    public void ToolMonthInit() {
+    private void ToolMonthInit() {
         // by병선, "onMonthChanged 메소드 실행 전에 툴바 연도, 월 초기화", 210702
         toolYear= (TextView)findViewById(R.id.toolYear);
         toolMonth = (TextView)findViewById(R.id.toolMonth);

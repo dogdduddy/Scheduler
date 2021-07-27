@@ -9,11 +9,9 @@
     android:background="#00FFFFFF"
     app:umanoDragView="@id/drawer"
     app:umanoPanelHeight="30dp"
-    app:umanoOverlay="true"
-    app:umanoShadowHeight="0dp"
+    app:umanoShadowHeight="100dp"
     tools:context=".MainActivity"
-    app:umanoFadeColor="#00000000"
-    >
+    app:umanoParallaxOffset="300dp">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
