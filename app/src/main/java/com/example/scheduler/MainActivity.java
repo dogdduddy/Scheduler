@@ -167,13 +167,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     //current로 강제로 옮기면서 2번 실행됨을 방지
                     if(oldPosition != 0) {
                         Log.d("MainActivity", "RTL +");
+                        try {
+                            DateCal(1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SlidingMonthChange();
                     }
 
                 }
                 else {
                     //current로 강제로 옮기면서 2번 실행됨을 방지
-                    if(oldPosition != 4)
+                    if(oldPosition != 4) {
                         Log.d("MainActivity", "LTR -");
+                        try {
+                            DateCal(-1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SlidingMonthChange();
+                    }
                 }
 
                 oldPosition = newPosition;
@@ -205,13 +218,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onDateSelected(@NonNull @org.jetbrains.annotations.NotNull MaterialCalendarView widget, @NonNull @org.jetbrains.annotations.NotNull CalendarDay date, boolean selected) {
         // 슬라이딩 패널 날짜 변경(클릭)
-        SlidingMonthChange(date);
-        try {
-            DateInc(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Log.d("MainActivity", "Testsss :"+date.toString());
+        getSelectDay = date;
+        SlidingMonthChange();
     }
     private TextWatcher test(CalendarDay date ) {
         final boolean[][] preDeco = {new boolean[6]};
@@ -336,25 +344,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void SlidingPanelInit() {
-        SlidingMonthChange(getSelectDay);
+        SlidingMonthChange();
     }
     
-    public void SlidingMonthChange(CalendarDay date) {
+    public void SlidingMonthChange() {
         // todoMonth에 들어갈 date format
-        String stringDate = date.toString();
+        // 나중에 DateCal이랑 중복처리해서 작업
+        String stringDate = getSelectDay.toString();
         String[] splitDate = stringDate.split("-");
         splitDate[2] = splitDate[2].substring(0,splitDate[2].lastIndexOf("}"));
         todoMonth.setText(splitDate[1] +"."+ splitDate[2]);
     }
-
-    public void DateInc(CalendarDay dates) throws ParseException {
+    // Sliding Swipe 날짜 가/감소
+    public void DateCal(int num) throws ParseException {
         // CalendarDay 값 date로 변경 후 1증가. 그리고 다시 변환
-        String stringDate = dates.toString();
+        String stringDate = getSelectDay.toString();
         String[] splitDate = stringDate.split("-");
         Date date;
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        Log.d("MainActivity", "DateInc 1 : " + dates);
+
         if(splitDate[1].length() == 1)
             splitDate[1] = "0" + Integer.parseInt(splitDate[1]);
         if(splitDate[2].indexOf("}") == 1)
@@ -363,16 +372,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             splitDate[2] = splitDate[2].substring(0,2);
         stringDate = splitDate[0].substring(splitDate[0].indexOf("{")+1) +"-"+ splitDate[1] +"-"+ splitDate[2];
         date = transFormat.parse(stringDate);
-        Log.d("MainActivity", "DateInc 3 : " + transFormat.format(date));
+        
         cal.setTime(date);
-        cal.add(Calendar.DATE, 1);
-
-        Log.d("MainActivity", "DateInc 4 : " + cal.getTime());
-        //getSelectDay = CalendarDay.from(Integer.parseInt(splitDate[0]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[2]));
-    }
-
-    public void DateDec(CalendarDay date) {
-
+        cal.add(Calendar.DATE, num);
+        // cal.getTime() 으로 date형태로 변환한 값 받기 가능. but format 안 된 형태 -> 재포맷해서 String 출력
+        splitDate = transFormat.format(cal.getTime()).split("-");
+        // String형태에서 split으로 년,월,일 구분 후 CalendarDay 형태로 포맷
+        getSelectDay = CalendarDay.from(Integer.parseInt(splitDate[0]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[2]));
+        Log.d("MainActivity", "DateInc 4 : " + getSelectDay);
     }
 
     // 점 지우기
