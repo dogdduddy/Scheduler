@@ -1,5 +1,7 @@
 package com.example.scheduler;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -22,7 +24,7 @@ public class MyAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
-
+        Log.d("MainActivity", "position 111111 " + position);
         if(position == 0)
             position = 3;
         else if(position == 4)

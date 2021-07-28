@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +15,12 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.jetbrains.annotations.NotNull;
 
-public class FragFirst extends Fragment {
+public class FragFirst extends Fragment implements View.OnClickListener {
     private int frag_num;
     TextView data_t;
+    private CalendarDay dates;
+    private boolean[] dotList;
+    private boolean preDecoCheck[];
 
     public FragFirst(){
 
@@ -28,6 +32,7 @@ public class FragFirst extends Fragment {
         Bundle args = new Bundle();
         args.putInt("num",num);
         fragment.setArguments(args);
+        fragment.dates = date;
         return fragment;
     }
 
@@ -44,8 +49,16 @@ public class FragFirst extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frame_1p,container,false);
+        dotList = new boolean[]{true, true, false, false, false, false};
+        preDecoCheck = new boolean[]{false};
+
+
+        Button btn = view.findViewById(R.id.testBtn);
+        btn.setOnClickListener(this);
+
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancedState){
         super.onViewCreated(view,savedInstancedState);
@@ -56,5 +69,11 @@ public class FragFirst extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onClick(View v) {
+        dates = ((MainActivity)MainActivity.mContext).getSelectDay;
+        ((MainActivity)MainActivity.mContext).AddDecorator(dotList, dates, preDecoCheck[0]);
     }
 }

@@ -49,6 +49,7 @@ import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,14 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView toolYear;
     TextView toolMonth;
     MaterialCalendarView materialCalendarView;
-
     public static Context mContext;
     GestureDetector gestureDetector = null;
 
     // ViewPager2
-    public CalendarDay getSelectDay = CalendarDay.today();
+    public CalendarDay getSelectDay;
     private int oldPosition = 0;
-    private boolean checkCurrent = false;
+    private boolean checkCurrent = true;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mContext = this;
         materialCalendarView = findViewById(R.id.calendarView);
         todoMonth = findViewById(R.id.todoMonth);
-
+        getSelectDay = CalendarDay.today();
         ToolMonthInit();
         CalendarInit();
         SlidingPanelInit();
@@ -139,19 +139,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pagerAdapter = new MyAdapter(this);
         mPager.setAdapter(pagerAdapter);
 
+        /*
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mPager.setOffscreenPageLimit(3);
+         */
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 //맨 처음 position 0으로 시작해서 third Fragment 보이는듯
+                Log.d("MainActivity","checkCurrent 1111");
                 if (positionOffsetPixels == 0) {
-                    if(position == 0)
-                        mPager.setCurrentItem(3,false);
-                    else if (position == 4)
-                        mPager.setCurrentItem(1 , false);
+                    Log.d("MainActivity","checkCurrent 2222");
+                    if(checkCurrent) {
+                        Log.d("MainActivity","checkCurrent 33333");
+                        mPager.setCurrentItem(1, false);
+                        checkCurrent = false;
+                    }
+                    else {
+                        Log.d("MainActivity","checkCurrent 4444");
+                        if (position == 0) {
+                            Log.d("MainActivity", "checkCurrent 55555");
+                            mPager.setCurrentItem(3, false);
+                        }
+                        else if (position == 4)
+                            mPager.setCurrentItem(1, false);
+                    }
                 }
             }
 
@@ -188,9 +202,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SlidingMonthChange();
                     }
                 }
-
+                setDateSeleted();
                 oldPosition = newPosition;
-                checkCurrent = false;
             }
         });
 
@@ -245,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(!((editText3.getText().toString().length()) == 0))
                     dotList[2] = true;
                 Log.d("MainActivity", "333333/// "+date);
-                 */
+
                 if(!(preDeco[0].length == 0))
                     preDecoCheck[0] = true;
                 else
@@ -256,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //AddDecorator(dotList, calendarDays, preDecoCheck[0]);
                 AddDecorator(dotList, date, preDecoCheck[0]);
                 preDeco[0] = dotList;
+                */
+
             }
 
             @Override
@@ -340,7 +355,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String getTime = sdf.format(date);
         toolYear.setText(getTime.substring(0,4));
         toolMonth.setText(getTime.substring(5,7));
-
     }
 
     private void SlidingPanelInit() {
@@ -372,7 +386,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             splitDate[2] = splitDate[2].substring(0,2);
         stringDate = splitDate[0].substring(splitDate[0].indexOf("{")+1) +"-"+ splitDate[1] +"-"+ splitDate[2];
         date = transFormat.parse(stringDate);
-        
         cal.setTime(date);
         cal.add(Calendar.DATE, num);
         // cal.getTime() 으로 date형태로 변환한 값 받기 가능. but format 안 된 형태 -> 재포맷해서 String 출력
@@ -380,6 +393,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // String형태에서 split으로 년,월,일 구분 후 CalendarDay 형태로 포맷
         getSelectDay = CalendarDay.from(Integer.parseInt(splitDate[0]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[2]));
         Log.d("MainActivity", "DateInc 4 : " + getSelectDay);
+    }
+    // 달력 선택 날짜 변경
+    public void setDateSeleted() {
+        materialCalendarView.setSelectedDate(getSelectDay);
     }
 
     // 점 지우기

@@ -9,7 +9,12 @@
         android:layout_marginRight="@dimen/pageMarginAndOffset"
         android:layout_height="@dimen/frameSize"
         android:orientation="vertical">
-
+        <Button
+            android:id="@+id/testBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            />
         <ImageView
             android:id="@+id/imgBanner1"
             android:layout_width="match_parent"

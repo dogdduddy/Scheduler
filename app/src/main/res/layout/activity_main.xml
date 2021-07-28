@@ -142,8 +142,9 @@
                         android:clipToPadding="false"
                         android:clipChildren="false"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/frameSize" />
-                        />
+                        android:layout_height="@dimen/frameSize"
+                        android:orientation="horizontal"/>
+
                 </FrameLayout>
                 <TextView
                     android:id="@+id/text"
