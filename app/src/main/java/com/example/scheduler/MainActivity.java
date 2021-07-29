@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         mPager.setCurrentItem(3, false);
                     else if (currentPosition == 4)
                         mPager.setCurrentItem(1, false);
+
                 }
             }
 
