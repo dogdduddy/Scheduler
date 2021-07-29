@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // ViewPager2
     public CalendarDay getSelectDay = CalendarDay.today();
     private int oldPosition = 0;
-    private boolean checkCurrent = false;
+    private boolean checkCurrent = true;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -137,62 +137,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mPager = findViewById(R.id.viewpager);
         //Adapter
         pagerAdapter = new MyAdapter(this);
-        mPager.setAdapter(pagerAdapter);
-
-        //ViewPager Setting
-        mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        mPager.setOffscreenPageLimit(3);
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            private int currentPosition;
+
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                //맨 처음 position 0으로 시작해서 third Fragment 보이는듯
-                if (positionOffsetPixels == 0) {
-                    if(position == 0)
-                        mPager.setCurrentItem(3,false);
-                    else if (position == 4)
-                        mPager.setCurrentItem(1 , false);
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if (state == ViewPager2.SCROLL_STATE_DRAGGING || state == ViewPager2.SCROLL_STATE_IDLE) {
+                    if (currentPosition == 0)
+                        mPager.setCurrentItem(3, false);
+                    else if (currentPosition == 4)
+                        mPager.setCurrentItem(1, false);
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-                int newPosition = position;
-                int compaire = newPosition - oldPosition;
-
-                super.onPageSelected(position);
-
-                // 두 수의 차가 -, + 인지로 위치 확인
-                if(compaire > 0 ) {
-                    //current로 강제로 옮기면서 2번 실행됨을 방지
-                    if(oldPosition != 0) {
-                        Log.d("MainActivity", "RTL +");
-                        try {
-                            DateCal(1);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        SlidingMonthChange();
-                    }
-
-                }
-                else {
-                    //current로 강제로 옮기면서 2번 실행됨을 방지
-                    if(oldPosition != 4) {
-                        Log.d("MainActivity", "LTR -");
-                        try {
-                            DateCal(-1);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        SlidingMonthChange();
-                    }
-                }
-
-                oldPosition = newPosition;
-                checkCurrent = false;
+              currentPosition = position;
+              super.onPageSelected(position);
             }
         });
+        mPager.setAdapter(pagerAdapter);
+
+
 
         final float pageMargin= getResources().getDimensionPixelOffset(R.dimen.pageMargin);
         final float pageOffset = getResources().getDimensionPixelOffset(R.dimen.offset);

@@ -26,8 +26,9 @@ public class FragFirst extends Fragment {
     public static FragFirst newInstance(int num, CalendarDay date){
         FragFirst fragment = new FragFirst();
         Bundle args = new Bundle();
-        args.putInt("num",num);
-        fragment.setArguments(args);
+        //args.putInt("num",num);
+        fragment.frag_num = num;
+        //fragment.setArguments(args);
         return fragment;
     }
 
@@ -36,7 +37,7 @@ public class FragFirst extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        frag_num = getArguments().getInt("num",0);
+        //frag_num = getArguments().getInt("num",0);
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -50,7 +51,7 @@ public class FragFirst extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancedState){
         super.onViewCreated(view,savedInstancedState);
         data_t = (TextView) view.findViewById(R.id.tvName1);
-        data_t.setText("Page " + frag_num);
+        data_t.setText("Page " + frag_num + " !");
     }
 
     @Override

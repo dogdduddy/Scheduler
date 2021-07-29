@@ -1,5 +1,7 @@
 package com.example.scheduler;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MyAdapter extends FragmentStateAdapter {
     private int[] ItemList = {0, 1, 2, 3, 4};
+    private boolean checkFirst = true;
 
     public MyAdapter(@NonNull @NotNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -21,22 +24,23 @@ public class MyAdapter extends FragmentStateAdapter {
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-        CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
+        Log.d("MainActivity", "Position : "+ position);
+        CalendarDay date = ((MainActivity) MainActivity.mContext).getSelectDay;
 
-        if(position == 0)
-            position = 3;
-        else if(position == 4)
-            position = 1;
-        switch(position) {
-            case 1:
+        return FragFirst.newInstance(position, date);
+        /*
+        switch (position) {
+            case 0:
                 return FragFirst.newInstance(position, date);
-            case 2:
+            case 1:
                 return FragSecond.newInstance(position, date);
-            case 3:
+            case 2:
                 return FragThird.newInstance(position, date);
             default:
                 return null;
         }
+
+         */
     }
 
     @Override
