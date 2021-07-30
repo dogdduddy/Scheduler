@@ -139,26 +139,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pagerAdapter = new MyAdapter(this);
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             private int currentPosition;
+            private int oldPosition;
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
                 if (state == ViewPager2.SCROLL_STATE_DRAGGING || state == ViewPager2.SCROLL_STATE_IDLE) {
-                    if (currentPosition == 0)
+                    Log.d("MainActivity", "StateChange1 : "+ currentPosition);
+                    if (currentPosition == 0) {
                         mPager.setCurrentItem(3, false);
-                    else if (currentPosition == 4)
-                        mPager.setCurrentItem(1, false);
+                        Log.d("MainActivity", "StateChange2 : "+ currentPosition);
+                    }
 
+                    else if (currentPosition == 4) {
+                        mPager.setCurrentItem(1, false);
+                        Log.d("MainActivity", "StateChange3 : "+ currentPosition);
+                    }
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-              currentPosition = position;
               super.onPageSelected(position);
+              currentPosition = position;
             }
         });
         mPager.setAdapter(pagerAdapter);
+        mPager.setCurrentItem(1, false);
 
 
 
