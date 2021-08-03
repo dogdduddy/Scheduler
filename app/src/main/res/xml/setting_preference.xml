@@ -26,7 +26,8 @@
                 android:title="프로필 이미지 수정" />
             <ListPreference
                 android:key="Withdrawal"
-                android:title="회원 탈퇴" />
+                android:title="회원 탈퇴"
+                android:widgetLayout="@layout/activity_withdrawal"/>
         </PreferenceScreen>
 
         <PreferenceScreen android:title="공지사항"
