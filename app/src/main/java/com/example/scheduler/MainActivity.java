@@ -195,8 +195,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             e.printStackTrace();
                         }
                         SlidingMonthChange();
-                    } else if (oldPosition == 1) {
-                        Log.d("MainActivity", "RTL ++");
                     }
                 }
                 else if(compaire < 0){
@@ -211,8 +209,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SlidingMonthChange();
                     }
                 }
-                else {
-                    if(checkCurrent && newPosition == 2) {
+                if(checkCurrent) {
+                    if(newPosition == 2) {
                         Log.d("MainActivity", "RTL +");
                         try {
                             DateCal(1);
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SlidingMonthChange();
                         checkCurrent = false;
                     }
-                    else if(checkCurrent && newPosition == 0) {
+                    else if(newPosition == 0) {
                         Log.d("MainActivity", "LTR -");
                         try {
                             DateCal(-1);
@@ -374,6 +372,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         materialCalendarView.setOnMonthChangedListener(this);
         // by병선, "상단 bar 없애기", 210702
         materialCalendarView.setTopbarVisible(false);
+        // 오늘 Selection 표시
+        materialCalendarView.setSelectedDate(CalendarDay.today());
     }
     // by병선, "ToolBar 연,월 초기화", 210707
     private void ToolMonthInit() {
