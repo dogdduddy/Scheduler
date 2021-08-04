@@ -25,16 +25,25 @@ public class MyAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
         Log.d("MainActivity", "position 111111 " + position);
-        if(position == 0)
+
+        if(((MainActivity)MainActivity.mContext).adapterFirst) {
+            position = 1;
+            ((MainActivity)MainActivity.mContext).setAdapterFirst();
+        }
+        else if(position == 0)
             position = 3;
         else if(position == 4)
             position = 1;
+
         switch(position) {
             case 1:
+                Log.d("MainActivity", "Instance 1 ");
                 return FragFirst.newInstance(position, date);
             case 2:
+                Log.d("MainActivity", "Instance 2 ");
                 return FragSecond.newInstance(position, date);
             case 3:
+                Log.d("MainActivity", "Instance 3 ");
                 return FragThird.newInstance(position, date);
             default:
                 return null;

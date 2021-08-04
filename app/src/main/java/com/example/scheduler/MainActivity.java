@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public CalendarDay getSelectDay;
     private int oldPosition = 0;
     private boolean checkCurrent = true;
+    public boolean adapterFirst = true;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -105,28 +106,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("MainActivity", "제스쳐 Down!!!!!");
                 return true;
             }
-
             @Override
             public void onShowPress(MotionEvent e) {
                 Log.d("MainActivity", "제스쳐 onShowPress!!!");
             }
-
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
-
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
                 Log.d("MainActivity", "제스쳐 onScroll!!!");
                 return true;
             }
-
             @Override
             public void onLongPress(MotionEvent e) {
                 Log.d("MainActivity", "제스쳐 onLongPress !!!");
             }
-
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 Log.d("MainActivity", "제스쳐 onFling");
@@ -138,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Adapter
         pagerAdapter = new MyAdapter(this);
         mPager.setAdapter(pagerAdapter);
+        mPager.setCurrentItem(1,false);
 
         /*
         //ViewPager Setting
@@ -152,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("MainActivity","checkCurrent 1111");
                 if (positionOffsetPixels == 0) {
                     Log.d("MainActivity","checkCurrent 2222");
+                    /*
                     if(checkCurrent) {
                         Log.d("MainActivity","checkCurrent 33333");
                         mPager.setCurrentItem(1, false);
@@ -166,6 +164,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         else if (position == 4)
                             mPager.setCurrentItem(1, false);
                     }
+
+                     */
+                    Log.d("MainActivity","checkCurrent 4444");
+                    if (position == 0) {
+                        Log.d("MainActivity", "checkCurrent 55555");
+                        mPager.setCurrentItem(3, false);
+                    }
+                    else if (position == 4)
+                        mPager.setCurrentItem(1, false);
                 }
             }
 
@@ -173,13 +180,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onPageSelected(int position) {
                 int newPosition = position;
                 int compaire = newPosition - oldPosition;
-
+                Log.d("MainActivity", "position 22222 : " + position);
+                Log.d("MainActivity", "position 2222233 : " + oldPosition);
                 super.onPageSelected(position);
 
                 // 두 수의 차가 -, + 인지로 위치 확인
                 if(compaire > 0 ) {
                     //current로 강제로 옮기면서 2번 실행됨을 방지
-                    if(oldPosition != 0) {
+                    if (oldPosition != 0) {
                         Log.d("MainActivity", "RTL +");
                         try {
                             DateCal(1);
@@ -187,10 +195,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             e.printStackTrace();
                         }
                         SlidingMonthChange();
+                    } else if (oldPosition == 1) {
+                        Log.d("MainActivity", "RTL ++");
                     }
-
                 }
-                else {
+                else if(compaire < 0){
                     //current로 강제로 옮기면서 2번 실행됨을 방지
                     if(oldPosition != 4) {
                         Log.d("MainActivity", "LTR -");
@@ -202,8 +211,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SlidingMonthChange();
                     }
                 }
+                else {
+                    if(checkCurrent && newPosition == 2) {
+                        Log.d("MainActivity", "RTL +");
+                        try {
+                            DateCal(1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SlidingMonthChange();
+                        checkCurrent = false;
+                    }
+                    else if(checkCurrent && newPosition == 0) {
+                        Log.d("MainActivity", "LTR -");
+                        try {
+                            DateCal(-1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SlidingMonthChange();
+                    }
+                }
                 setDateSeleted();
                 oldPosition = newPosition;
+                Log.d("MainActivity", "position 2222233444 : " + oldPosition);
             }
         });
 
@@ -398,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setDateSeleted() {
         materialCalendarView.setSelectedDate(getSelectDay);
     }
-
+    public void setAdapterFirst() {adapterFirst = false;}
     // 점 지우기
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
