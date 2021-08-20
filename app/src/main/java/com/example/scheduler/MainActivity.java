@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 setDateSeleted();
                 SlidingMonthChange();
+                //Testg
                 mPager.post(new Runnable() {
                     @Override
                     public void run() {
