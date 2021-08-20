@@ -24,7 +24,7 @@ public class MyAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
-        Log.d("MainActivity", "position 111111 " + position);
+        Log.d("MainActivity", "getSelectDay :  " + date);
 
         if(((MainActivity)MainActivity.mContext).adapterFirst) {
             position = 1;
@@ -48,6 +48,16 @@ public class MyAdapter extends FragmentStateAdapter {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public boolean containsItem(long itemId) {
+        return super.containsItem(itemId);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     @Override

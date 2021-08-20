@@ -63,7 +63,7 @@ public class FragFirst extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancedState){
         super.onViewCreated(view,savedInstancedState);
         data_t = (TextView) view.findViewById(R.id.tvName1);
-        data_t.setText("Page " + frag_num);
+        data_t.setText("Date : " + dates);
     }
 
     @Override

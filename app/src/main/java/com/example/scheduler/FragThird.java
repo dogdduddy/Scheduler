@@ -59,7 +59,7 @@ public class FragThird extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancdState){
         super.onViewCreated(view,savedInstancdState);
         data_t = (TextView) view.findViewById(R.id.tvName3);
-        data_t.setText("Page " + frag_num);
+        data_t.setText("Date : " + dates);
     }
 
     @Override

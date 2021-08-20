@@ -19,6 +19,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MaterialCalendarView materialCalendarView;
     public static Context mContext;
     GestureDetector gestureDetector = null;
+    static int Position;
 
     // ViewPager2
     public CalendarDay getSelectDay;
@@ -146,9 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 //맨 처음 position 0으로 시작해서 third Fragment 보이는듯
-                Log.d("MainActivity","checkCurrent 1111");
                 if (positionOffsetPixels == 0) {
-                    Log.d("MainActivity","checkCurrent 2222");
                     /*
                     if(checkCurrent) {
                         Log.d("MainActivity","checkCurrent 33333");
@@ -166,9 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                      */
-                    Log.d("MainActivity","checkCurrent 4444");
                     if (position == 0) {
-                        Log.d("MainActivity", "checkCurrent 55555");
                         mPager.setCurrentItem(3, false);
                     }
                     else if (position == 4)
@@ -178,10 +176,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onPageSelected(int position) {
+                Position = position;
                 int newPosition = position;
                 int compaire = newPosition - oldPosition;
-                Log.d("MainActivity", "position 22222 : " + position);
-                Log.d("MainActivity", "position 2222233 : " + oldPosition);
                 super.onPageSelected(position);
 
                 // 두 수의 차가 -, + 인지로 위치 확인
@@ -194,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        SlidingMonthChange();
                     }
                 }
                 else if(compaire < 0){
@@ -206,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        SlidingMonthChange();
                     }
                 }
                 if(checkCurrent) {
@@ -217,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        SlidingMonthChange();
                         checkCurrent = false;
                     }
                     else if(newPosition == 0) {
@@ -227,12 +221,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        SlidingMonthChange();
                     }
                 }
                 setDateSeleted();
+                SlidingMonthChange();
+                pagerAdapter.notify
+                mPager.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("MainActivity", "Runnable : "+Position);
+                        pagerAdapter.notifyItemChanged(2);
+                    }
+                });
                 oldPosition = newPosition;
-                Log.d("MainActivity", "position 2222233444 : " + oldPosition);
             }
         });
 
@@ -433,6 +434,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 점 지우기
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
+    }
+    public void refresh(int posi) {
+        mPager.post(new Runnable() {
+            @Override
+            public void run() {
+                pagerAdapter.notifyItemChanged(posi);
+            }
+        });
     }
 }
 

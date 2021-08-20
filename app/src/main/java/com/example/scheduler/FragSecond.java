@@ -1,6 +1,7 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,12 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
+
 public class FragSecond extends Fragment {
     private int frag_num;
-    TextView data_t;
+    private TextView data_t;
+    private CalendarDay dates;
 
     public FragSecond(){
 
@@ -28,6 +32,8 @@ public class FragSecond extends Fragment {
         Bundle args = new Bundle();
         args.putInt("num",num);
         fragment.setArguments(args);
+        fragment.dates = date;
+        Log.d("MainActivity", "FragTest 1 : ");
         return fragment;
     }
 
@@ -37,6 +43,7 @@ public class FragSecond extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         frag_num = getArguments().getInt("num",0);
+        Log.d("MainActivity", "FragTest 2 : ");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -44,13 +51,15 @@ public class FragSecond extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frame_2p,container,false);
+        Log.d("MainActivity", "FragTest 3 : ");
         return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancdState){
         super.onViewCreated(view,savedInstancdState);
         data_t = (TextView) view.findViewById(R.id.tvName2);
-        data_t.setText("Page " + frag_num);
+        data_t.setText("Date : " + dates);
+        Log.d("MainActivity", "FragTest 4 : ");
     }
 
     @Override
