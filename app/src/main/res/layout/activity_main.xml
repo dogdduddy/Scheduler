@@ -136,7 +136,8 @@
                 <FrameLayout
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/frameSize">
+                    android:layout_height="@dimen/frameSize"
+                    android:id="@+id/frame">
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewpager"
                         android:clipToPadding="false"

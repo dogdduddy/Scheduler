@@ -60,6 +60,12 @@ public class FragSecond extends Fragment {
         data_t = (TextView) view.findViewById(R.id.tvName2);
         data_t.setText("Date : " + dates);
         Log.d("MainActivity", "FragTest 4 : ");
+
+        String dateTransed;
+        if(getArguments() != null) {
+            dateTransed = getArguments().getString("date");
+            data_t.setText("Date : .. " +dateTransed);
+        }
     }
 
     @Override

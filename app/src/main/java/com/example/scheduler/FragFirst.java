@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
@@ -29,9 +31,6 @@ public class FragFirst extends Fragment implements View.OnClickListener {
     // newInstance constructor for creating fragment with arguments
     public static FragFirst newInstance(int num, CalendarDay date){
         FragFirst fragment = new FragFirst();
-        Bundle args = new Bundle();
-        args.putInt("num",num);
-        fragment.setArguments(args);
         fragment.dates = date;
         return fragment;
     }
@@ -41,7 +40,6 @@ public class FragFirst extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        frag_num = getArguments().getInt("num",0);
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -52,10 +50,8 @@ public class FragFirst extends Fragment implements View.OnClickListener {
         dotList = new boolean[]{true, true, false, false, false, false};
         preDecoCheck = new boolean[]{false};
 
-
-        Button btn = view.findViewById(R.id.testBtn);
-        btn.setOnClickListener(this);
-
+        String dateTrans = "test";
+        Bundle bundle = new Bundle();
         return view;
     }
 

@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -180,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int newPosition = position;
                 int compaire = newPosition - oldPosition;
                 super.onPageSelected(position);
-
                 // 두 수의 차가 -, + 인지로 위치 확인
                 if(compaire > 0 ) {
                     //current로 강제로 옮기면서 2번 실행됨을 방지
@@ -225,14 +226,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 setDateSeleted();
                 SlidingMonthChange();
-                //Testg
-                mPager.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("MainActivity", "Runnable : "+Position);
-                        pagerAdapter.notifyItemChanged(2);
-                    }
-                });
                 oldPosition = newPosition;
             }
         });
@@ -434,14 +427,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 점 지우기
     public void DecoratorClear(DayViewDecorator decorator) {
         materialCalendarView.removeDecorator(decorator);
-    }
-    public void refresh(int posi) {
-        mPager.post(new Runnable() {
-            @Override
-            public void run() {
-                pagerAdapter.notifyItemChanged(posi);
-            }
-        });
     }
 }
 
