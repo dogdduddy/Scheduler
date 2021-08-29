@@ -56,10 +56,11 @@ public class FragThird extends Fragment {
         return view;
     }
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancdState){
-        super.onViewCreated(view,savedInstancdState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancedState){
+        super.onViewCreated(view,savedInstancedState);
         data_t = (TextView) view.findViewById(R.id.tvName3);
         data_t.setText("Date : " + dates);
+        Log.d("MainActivity", "FragTest 3 : " + dates);
     }
 
     @Override

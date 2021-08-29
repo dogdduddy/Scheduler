@@ -33,7 +33,6 @@ public class FragSecond extends Fragment {
         args.putInt("num",num);
         fragment.setArguments(args);
         fragment.dates = date;
-        Log.d("MainActivity", "FragTest 1 : ");
         return fragment;
     }
 
@@ -43,7 +42,6 @@ public class FragSecond extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         frag_num = getArguments().getInt("num",0);
-        Log.d("MainActivity", "FragTest 2 : ");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -51,21 +49,15 @@ public class FragSecond extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frame_2p,container,false);
-        Log.d("MainActivity", "FragTest 3 : ");
         return view;
     }
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancdState){
-        super.onViewCreated(view,savedInstancdState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstancedState){
+        super.onViewCreated(view,savedInstancedState);
         data_t = (TextView) view.findViewById(R.id.tvName2);
         data_t.setText("Date : " + dates);
-        Log.d("MainActivity", "FragTest 4 : ");
+        Log.d("MainActivity", "FragTest 2 : " + dates);
 
-        String dateTransed;
-        if(getArguments() != null) {
-            dateTransed = getArguments().getString("date");
-            data_t.setText("Date : .. " +dateTransed);
-        }
     }
 
     @Override
