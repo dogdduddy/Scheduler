@@ -60,6 +60,7 @@ public class FragThird extends Fragment {
         super.onViewCreated(view,savedInstancdState);
         data_t = (TextView) view.findViewById(R.id.tvName3);
         data_t.setText("Date : " + dates);
+        Log.d("MainActivity", "fragTest 3 : "+dates);
     }
 
     @Override
@@ -70,8 +71,6 @@ public class FragThird extends Fragment {
     private TextWatcher watcher (CalendarDay date ) {
         final boolean[][] preDeco = {new boolean[6]};
         final boolean[] preDecoCheck = new boolean[1];
-
-        Log.d("MainActivity", "2222222/// "+date);
 
         return new TextWatcher() {
             @Override

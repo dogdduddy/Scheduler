@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Adapter
         pagerAdapter = new MyAdapter(this);
         mPager.setAdapter(pagerAdapter);
-        mPager.setCurrentItem(1,false);
+
 
         /*
         //ViewPager Setting
@@ -167,15 +167,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             mPager.setCurrentItem(1, false);
                     }
 
-                     */
+
                     if (position == 0) {
                         mPager.setCurrentItem(3, false);
                     }
                     else if (position == 4)
                         mPager.setCurrentItem(1, false);
                 }
+                     */
+                }
             }
-
             @Override
             public void onPageSelected(int position) {
                 Position = position;

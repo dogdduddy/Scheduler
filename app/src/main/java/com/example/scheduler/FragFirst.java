@@ -1,6 +1,7 @@
 package com.example.scheduler;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class FragFirst extends Fragment implements View.OnClickListener {
         super.onViewCreated(view,savedInstancedState);
         data_t = (TextView) view.findViewById(R.id.tvName1);
         data_t.setText("Date : " + dates);
+        Log.d("MainActivity", "fragtest 1 : "+dates);
     }
 
     @Override

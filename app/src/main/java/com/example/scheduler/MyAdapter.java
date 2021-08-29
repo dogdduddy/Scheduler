@@ -30,36 +30,16 @@ public class MyAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         CalendarDay date = ((MainActivity)MainActivity.mContext).getSelectDay;
 
-        CalendarDay dateFirst = null;
-        CalendarDay dateSecond = null;
-        CalendarDay dateThird = null;
-
-        Log.d("MainActivity", "getSelectDay :  " + date);
-        Log.d("MainActivity", "getSelectPosition :  " + position);
-
-        if(((MainActivity)MainActivity.mContext).adapterFirst) {
-            position = 1;
-            ((MainActivity)MainActivity.mContext).setAdapterFirst();
-        }
-        else if(position == 0)
-            position = 3;
-        else if(position == 4)
-            position = 1;
-
-        dateSecond = date;
-        dateThird = date;
-
-        switch(position) {
+        switch(position%3 + 1) {
             case 1:
                 Log.d("MainActivity", "Instance 1 ");
-                return FragFirst.newInstance(position, dateFirst);
+                return FragFirst.newInstance(position, date);
             case 2:
                 Log.d("MainActivity", "Instance 2 ");
-                FragThird.newInstance(position, dateThird);
-                return FragSecond.newInstance(position, dateSecond);
+                return FragSecond.newInstance(position, date);
             case 3:
                 Log.d("MainActivity", "Instance 3 ");
-                return FragThird.newInstance(position, dateThird);
+                return FragThird.newInstance(position, date);
             default:
                 return null;
         }
@@ -77,7 +57,7 @@ public class MyAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return ItemList.length;
+        return 2000;
     }
 
 }
