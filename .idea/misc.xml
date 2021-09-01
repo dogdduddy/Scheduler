@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/dogdd/AndroidStudioProjects/Scheduler/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/dogdd/AndroidStudioProjects/Scheduler/app/src/main/res/layout/activity_main2.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/dogdd/AndroidStudioProjects/Scheduler/app/src/main/res/layout/frame_1p.xml" value="0.10260416666666666" />
+        <entry key="..\:/Users/dogdd/AndroidStudioProjects/Scheduler/app/src/main/res/layout/item_viewpager.xml" value="0.10260416666666666" />
       </map>
     </option>
   </component>
